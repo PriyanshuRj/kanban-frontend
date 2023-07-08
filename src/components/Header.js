@@ -1,7 +1,12 @@
 import React from 'react'
 import { SearchNormal1, Calendar2, MessageQuestion, Notification, ArrowDown2 } from 'iconsax-react';
-const profilePicture = process.env.PUBLIC_URL + "/profile.png";
+import { useSelector } from 'react-redux';
+const profilePicture = process.env.PUBLIC_URL + "/user1.png";
+
 export default function Header() {
+  const userData = useSelector((state)=> state.user.value);
+  const {name, mobileno} = userData;
+  console.log(userData)
   return (
     <div className='flex flex-row justify-end md:justify-between h-[4.4rem] py-3 pl-8 border-b-2 pr-8'>
       <div className="relative w-[26rem] hidden md:flex">
@@ -18,9 +23,9 @@ export default function Header() {
         </div>
         <div className='flex flex-row'>
           <div className='flex flex-col justify-end items-end mr-5'>
-            <p className='text-base text-[#0D062D]'>Anima Agrawal</p>
+            <p className='text-base text-[#0D062D]'>{name}</p>
             <p className='text-sm text-[#787486]'>
-              U.P, India
+              {mobileno}
             </p>
           </div>
           <div className='flex flex-row items-center'>

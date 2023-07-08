@@ -6,7 +6,7 @@ const authUtils = {
     if (!token) return false
     try {
       const res = await getProfileService()
-      return res.user
+      return res.data.user
     } catch {
       return false
     }

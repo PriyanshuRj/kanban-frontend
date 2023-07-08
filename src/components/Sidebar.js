@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function Sidebar({sidebarState, setSidebarOpen}) {
 
   const [selectedProject, selectProject] = useState(0);
-  const projectList = useSelector((state)=>state.board.list)
+  const projectList = useSelector((state)=>state.projects.list)
   return (
     <div className={`sidebar flex flex-col w-60 border-r-2 h-screen absolute z-10 bg-white overflow-y-scroll ${!sidebarState && 'hidden'}`}>
       <div className='px-4 py-6 h-[4.4rem] flex flex-row items-center justify-between border-b-2'>

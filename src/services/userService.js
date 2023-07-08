@@ -17,9 +17,12 @@ export async function signupService(data){
 export async function loginService(data){
     try{
         const res = await axios.post(URL + "login",data);
+        if(res.data.token) localStorage.setItem("token", res.data.token);
+        else localStorage.removeItem("token");
         return res;
     }
     catch(error){
+        localStorage.removeItem("token");
         return [];
     }
 }

@@ -4,8 +4,6 @@ import { Rings } from "react-loader-spinner";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { signupService } from "../services/userService";
-import { ToastContainer, toast } from 'react-toastify';
 import validateSignup from "../validation/signup";
 export default function Signup() {
 

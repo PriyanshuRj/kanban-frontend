@@ -4,6 +4,8 @@ import { Rings } from "react-loader-spinner";
 
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import validateLogin from "../validation/login";
+
 export default function Login() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -14,13 +16,13 @@ export default function Login() {
 
   const login = async () => {
     try {
-      setLoading(true);
-   
-
+      // setLoading(true);
+      const res = await validateLogin(email,  password);
+      if(res) navigate('/dashboard')
     } catch (e) {
       console.warn("error ", e);
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
   return (

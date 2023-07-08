@@ -4,6 +4,7 @@ import Login from './pages/login'
 import Signup from './pages/signup'
 import VerifyOTP from './pages/verifyOTP'
 import LandingPage from './pages/LandingPage'
+import Dashboard from './pages/Dashboard'
 export function Router() {
     return (
       <BrowserRouter>
@@ -11,6 +12,7 @@ export function Router() {
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<Signup/>} />
         <Route path="/otp" element={<VerifyOTP/>} />
+        <Route path="/dashboard" element={<Dashboard/>} />
 
         <Route path="/boards" element={<Board/>} />
         <Route path="/boards/:boardId" element={<Board />} />
