@@ -5,11 +5,13 @@ import { Rings } from "react-loader-spinner";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signupService } from "../services/userService";
+import { ToastContainer, toast } from 'react-toastify';
+import validateSignup from "../validation/signup";
 export default function Signup() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phoneNo, setPhoneNo] = useState("");
+  const [mobileno, setMobileNo] = useState("");
   const [fullName, setFullName] = useState("");
   const [loading, setLoading] = useState(false);
   const [otpState, setOTPState] = useState("email");
@@ -17,14 +19,15 @@ export default function Signup() {
 
   const signup = async () => {
     try {
-      setLoading(true);
-      signupService({ email: email, password: password, })
-      // navigate('/otp', {state : {email:email}})
+      // setLoading(true);
+      const emailOTPState = otpState === "email" ? true : false;
+      const res = await validateSignup(email,  password, fullName, mobileno,  !emailOTPState, emailOTPState);
+      if(res) navigate('/otp', {state : {email:email}})
 
     } catch (e) {
       console.warn("error ", e);
     } finally {
-      setLoading(false);
+      // setLoading(false);
     }
   };
   return (
@@ -110,8 +113,8 @@ export default function Signup() {
                     <input
                       type="number"
                       placeholder="Phone Number"
-                      value={phoneNo}
-                      onChange={(e) => setPhoneNo(e.target.value)}
+                      value={mobileno}
+                      onChange={(e) => setMobileNo(e.target.value)}
                       className="flex px-3 py-2 font-medium border-2 border-black rounded-lg md:px-4 md:py-3 placeholder:font-normal"
                     />
                     <input

@@ -4,10 +4,12 @@ import headers from './axiosClient';
 
 export async function signupService(data){
     try{
+        console.log(data)
         const res = await axios.post(URL + "signup",data);
         return res;
     }
     catch(error){
+        console.log(error)
         return [];
     }
 }

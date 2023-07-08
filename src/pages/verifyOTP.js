@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Rings } from "react-loader-spinner";
-
+import validateOTP from "../validation/OTP";
 import { useNavigate,useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -14,15 +14,14 @@ export default function VerifyOTP() {
 
   let navigate = useNavigate();
 
-  const login = async () => {
+  const submitOTP = async () => {
     try {
-      setLoading(true);
+      validateOTP(email, otp);
    
 
     } catch (e) {
       console.warn("error ", e);
     } finally {
-      setLoading(false);
     }
   };
   return (
@@ -87,7 +86,7 @@ export default function VerifyOTP() {
                     />
         
                     <button
-                      onClick={() => login()}
+                      onClick={() => submitOTP()}
                       className="flex items-center justify-center flex-none px-3 py-2 font-medium text-white bg-black border-2 border-black rounded-lg md:px-4 md:py-3"
                     >
                       Sign up
