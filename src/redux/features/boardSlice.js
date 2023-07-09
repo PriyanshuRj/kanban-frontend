@@ -1,25 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { lists } from '../../helpers/kanbarData'
-const initialState = { list: [{
-  title: "Mobile App",
-  stateColor: "#7AC555",
-  kanban:null
-},
-{
-  title: "Website Redesign",
-  stateColor: "#FFA500",
-  kanban:null
-},
-{
-  title: "Design System",
-  stateColor: "#E4CCFD",
-  kanban:null
-},
-{
-  title: "Wireframes",
-  stateColor: "#76A5EA",
-  kanban:null
-}],
+const initialState = { board : {}
 }
 
 export const boardSlice = createSlice({
@@ -27,7 +8,7 @@ export const boardSlice = createSlice({
   initialState,
   reducers: {
     setBoards: (state, action) => {
-      state.list = action.payload
+      state.board = action.payload
     },
   }
 })

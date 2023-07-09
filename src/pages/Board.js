@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import Kanban from '../components/Kanban'
 import Layout from '../layout/Layout'
-import { useNavigate, useParams} from 'react-router-dom'
+import { useNavigate, useParams, useLocation} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link1, AddSquare, Filter, ArrowDown2, Calendar1, Profile2User, Pause, Menu } from 'iconsax-react';
 const user1Pic = process.env.PUBLIC_URL + "/user1.png";
@@ -14,6 +14,7 @@ export default function Board() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { boardId } = useParams()
+
   const [viewTyle, setViewType] = useState("list");
   return (
     <Layout>

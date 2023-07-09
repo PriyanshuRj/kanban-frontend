@@ -45,7 +45,7 @@ export default function Login() {
                 <div className="flex items-center justify-start space-x-3">
                   <span className="w-8 h-8 bg-black rounded-full"></span>
                   <Link href="/" className="text-xl font-medium">
-                    Classwood
+                    Kanban
                   </Link>
                 </div>
                 <div className="space-y-5">

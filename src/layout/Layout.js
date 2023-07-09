@@ -2,33 +2,51 @@ import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 import { ArrowRight2 } from 'iconsax-react'
-import Sidebar from '../components/Sidebar'
-import { useDispatch } from 'react-redux'
+import Sidebar from '../components/Sidebar/Sidebar'
+import { useDispatch, useSelector } from 'react-redux'
 import authUtils from '../utils/authUtils'
 import { setUser } from '../redux/features/userSlice'
 import { Rings } from 'react-loader-spinner'
+import { setProjects, setModalState } from '../redux/features/projectSlice'
+import Modal from 'react-modal';
+import { styles } from '../helpers/modalStyle';
+import AddProject from '../components/Modals/AddProject'
 export default function Layout({ children }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
   const [sidebarState, setSidebarOpen] = useState(true);
-
+  const modalState = useSelector(state => state.projects.modalState)
   useEffect(() => {
     const checkAuth = async () => {
       setLoading(true);
+      console.log("reloading")
       const user = await authUtils.isAuthenticated()
       console.log(user)
       if (!user) {
         navigate('/login')
       } else {
         dispatch(setUser(user))
+        dispatch(setProjects(user.projects))
         setLoading(false);
       }
     }
     checkAuth()
-  }, [navigate])
+  }, [])
+  function closeModal(){
+    dispatch(setModalState(false));
+  }
   return (
     <>
+    <Modal
+        isOpen={modalState}
+        ariaHideApp={false}
+        onRequestClose={closeModal}
+        style={styles}
+        contentLabel="Add Project Modal"
+      >
+        <AddProject  modalState={modalState} />
+      </Modal>
     {loading ? (
       <div className="flex items-center justify-center w-screen h-screen">
         <Rings

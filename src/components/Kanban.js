@@ -37,7 +37,7 @@ export default function Kanban() {
       const index = newData.findIndex(e => e.id === sectionId)
       const task = {
         section: boardId + sectionId,
-        id: sectionId + newData[index].tasks.length.toString(),
+        id: sectionId + boardId + newData[index].tasks.length.toString() ,
         position: newData[index].tasks.length.toString(),
         title: 'New Task',
         content: 'Very good task',
@@ -45,7 +45,8 @@ export default function Kanban() {
         comments: 0,
         file: 0,
         assignies: [],
-        picture: []
+        picture: [],
+      
 
       }
       newData[index].tasks.unshift(task)

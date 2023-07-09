@@ -19,6 +19,7 @@ const initialState = { list: [{
   stateColor: "#76A5EA",
   kanban:null
 }],
+modalState: false
 }
 
 export const projectsSlice = createSlice({
@@ -30,10 +31,14 @@ export const projectsSlice = createSlice({
     },
     addProject: (state, action) =>{
         state.list = [...state.list, action.payload]
-    }
+    },
+    setModalState: (state, action) => {
+        state.modalState = action.payload;
+    },
+
   }
 })
 
-export const { setProjects, addProject } = projectsSlice.actions
+export const { setProjects, addProject, setModalState } = projectsSlice.actions
 
 export default projectsSlice.reducer
