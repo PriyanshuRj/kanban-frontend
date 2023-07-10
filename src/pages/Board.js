@@ -1,9 +1,12 @@
-import React,{useState} from 'react'
-import Kanban from '../components/Kanban'
+import React,{useState, useEffect} from 'react'
+import Kanban from '../components/Kanban/Kanban'
 import Layout from '../layout/Layout'
-import { useNavigate, useParams, useLocation} from 'react-router-dom'
+import { useNavigate, useParams} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link1, AddSquare, Filter, ArrowDown2, Calendar1, Profile2User, Pause, Menu } from 'iconsax-react';
+import { getSingleProject } from '../services/projectService'
+import { setBoards } from '../redux/features/boardSlice'
+
 const user1Pic = process.env.PUBLIC_URL + "/user1.png";
 const user2Pic = process.env.PUBLIC_URL + "/user2.png";
 const user3Pic = process.env.PUBLIC_URL + "/user3.png";
@@ -13,8 +16,16 @@ const user4Pic = process.env.PUBLIC_URL + "/user4.png";
 export default function Board() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { boardId } = useParams()
-
+  const { boardId } = useParams();
+  async function fetchAndSetProject(){
+    const res = await getSingleProject(boardId);
+    if(res.status == 200) dispatch(setBoards(res.data.project))
+  }
+  useEffect(()=>{
+    fetchAndSetProject();
+  },[boardId])
+  const board = useSelector(state=>state.board.board);
+  console.log(board)
   const [viewTyle, setViewType] = useState("list");
   return (
     <Layout>
@@ -22,7 +33,7 @@ export default function Board() {
         <div className='flex flex-col md:mr-10 mr-4 justify-center'>
           <div className='flex flex-row w-full justify-between items-center'>
             <div className='flex flex-row items-center'>
-              <p className='text-3xl md:text-4xl lg:text-[2.875rem] font-semibold'>Mobile App</p>
+              <p className='text-3xl md:text-4xl lg:text-[2.875rem] font-semibold'>{board.title ? board.title : "My Project"}</p>
               <div className='w-6 h-6 rounded-md bg-[#5030E5] bg-opacity-[0.2] flex justify-center items-center ml-4'>
                 <svg className='h-[0.8rem] w-[0.8rem]' viewBox="5 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g filter="url(#filter0_d_1_611)">
@@ -139,8 +150,8 @@ export default function Board() {
             </div>
           </div>
         </div>
-        <div className=' overflow-x-scroll'>
-        <Kanban/>
+        <div className=' overflow-x-scroll hide-scrollbar '>
+        <Kanban boardId={boardId} />
         </div>
       </div>
     </Layout>

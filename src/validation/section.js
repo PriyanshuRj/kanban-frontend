@@ -1,7 +1,6 @@
 import {  toast } from 'react-toastify';
-import { createProjectService } from "../services/projectService";
-
-export default async function validateProject(title,  description){
+import { createSectionService } from '../services/sectionService';
+export default async function validateSection(title, color, projectId){
 
     if(title.length < 2){
         toast.warn('Title should be of atlest 2 digits', {
@@ -17,7 +16,7 @@ export default async function validateProject(title,  description){
         return false;
     }
 
-    const id = toast.loading("Creating Project",{
+    const id = toast.loading("Creating Section",{
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -29,11 +28,11 @@ export default async function validateProject(title,  description){
         })
 
     
-    const res = await createProjectService({title,  description});
+    const res = await createSectionService({title, color}, projectId);
     console.log(res);
     if(res.status === 201){
         toast.update(id, { 
-            render: "Project created", 
+            render: "Section created", 
             type: "success",
             isLoading: false,
             position: "top-right",
@@ -50,7 +49,7 @@ export default async function validateProject(title,  description){
   
     else {
         toast.update(id, { 
-            render: "Error creating Project", 
+            render: "Error creating Section", 
             type: "error",
             isLoading: false,
             position: "top-right",

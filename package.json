@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^38.1.0",
+    "@ckeditor/ckeditor5-react": "^6.1.0",
+    "@headlessui/react": "^1.7.15",
+    "@heroicons/react": "^2.0.18",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -12,6 +16,7 @@
     "iconsax-react": "^0.0.8",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
+    "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
     "react-loader-spinner": "^5.3.4",
     "react-modal": "^3.16.1",

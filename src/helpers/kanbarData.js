@@ -25,7 +25,7 @@ export const priorityColor = {
   }
 export const lists = [
 {
-    board: boardId,
+    project: boardId,
     title: 'To Do',
     tasks: [
     {
@@ -71,7 +71,7 @@ export const lists = [
 
 },
 {
-    board: boardId,
+    project: boardId,
     title: 'On Progress',
     tasks: [
     {
@@ -104,7 +104,7 @@ export const lists = [
     secondryColor: '#FFA500',
 },
 {
-    board: boardId,
+    project: boardId,
     title: 'Done',
     tasks: [
 
@@ -135,5 +135,5 @@ export const lists = [
     id: "3" + boardId,
     color: '#8BC48A',
     secondryColor: '#76A5EA'
-}
+},
 ]

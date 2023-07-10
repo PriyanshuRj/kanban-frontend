@@ -6,7 +6,6 @@ const profilePicture = process.env.PUBLIC_URL + "/user1.png";
 export default function Header() {
   const userData = useSelector((state)=> state.user.value);
   const {name, mobileno} = userData;
-  console.log(userData)
   return (
     <div className='flex flex-row justify-end md:justify-between h-[4.4rem] py-3 pl-8 border-b-2 pr-8'>
       <div className="relative w-[26rem] hidden md:flex">
