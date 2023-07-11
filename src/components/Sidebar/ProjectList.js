@@ -34,7 +34,7 @@ export default function ProjectList() {
         />
       </div>
       <div className='flex flex-col py-2'>
-        {projectList.map((item, index) => {
+        {projectList && projectList.map((item, index) => {
           return <div key={index} onClick={()=>navigateToProject(item)} className={`flex flex-row items-center justify-between  py-2 px-3 font-medium rounded-md ${boardId === item._id ? 'bg-[#5030E5] bg-opacity-[0.08] text-black' : 'text-[#787486]'} hover:bg-[#5030E5] hover:bg-opacity-[0.08] cursor-pointer my-1 hover:text-black`}>
             <div className='flex flex-row items-center font-medium rounded-md'>
               <span style={{ backgroundColor: item.stateColor ? item.stateColor : sidebarColor[index%sidebarColor.length] }} className={`w-2 h-2 rounded-full mr-2`}></span>

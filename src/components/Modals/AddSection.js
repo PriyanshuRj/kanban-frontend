@@ -42,25 +42,29 @@ export default function AddSection({boardId, modalState, AddNewSection}) {
             onChange={(e) => setTitle(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Title" />
         </div>
-        <div className='flex flex-row items-center justify-between my-4'>
-          <div className={`flex  ${selectColor ? 'flex-col' : 'items-center' } `}>
+        <div className='  my-4'>
+          <div className={`flex items-center justify-between w-full `}>
 
-        <label className={`block text-gray-700 text-sm font-bold ${selectColor ? 'mb-2' : 'mr-8' }`} >
+        <label className={`block text-gray-700 text-sm font-bold mr-8`} >
             Section Color
           </label>
-        <div className='p-[0.4rem] border w-min rounded-md' onClick={()=> setSelectColor(prev=> !prev)}>
+          <div className='relative'>
+
+        <div className='p-[0.4rem] border w-min rounded-md relative' onClick={()=> setSelectColor(prev=> !prev)}>
           <div className='h-6 w-12 rounded-md' style={{backgroundColor: color}} >
           </div>
-
+        
           </div>
+          <div className='' onClick={ ()=> setSelectColor(false) }>
+        {selectColor && <div className='absolute top-12'>
+          <BlockPicker color={color} onChange={setBlockColor} colors={defaultColors} triangle="hide" style={{position : 'absolute'}} />
         </div>
-        <div className=' z-10 flex'>
+         }
+        </div>
+        </div>
+         </div>
 
-        <div className='' onClick={ ()=> setSelectColor(false) }>
-
-        {selectColor && <BlockPicker color={color} onChange={setBlockColor} colors={defaultColors} triangle="hide" style={{position : 'absolute'}} />}
-        </div>
-        </div>
+       
         </div>
         <div className="flex items-center justify-between">
           <button onClick={createSection} className="bg-[#5030E5] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">

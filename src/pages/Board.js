@@ -25,7 +25,7 @@ export default function Board() {
     fetchAndSetProject();
   },[boardId])
   const board = useSelector(state=>state.board.board);
-  console.log(board)
+  
   const [viewTyle, setViewType] = useState("list");
   return (
     <Layout>

@@ -5,7 +5,7 @@ export  const styles = {
       left: 0,
       right: 0,
       bottom: 0,
-      // backgroundColor: '#010101',
+      overflow:'scroll',
       zIndex: 20,
       display: 'flex',
       justifyContent: 'center',
@@ -22,7 +22,7 @@ export  const styles = {
         background: 'rgba( 255, 255, 255, 0.5 )',
         boxShadow: '0 8px 32px 0 rgba( 31, 38, 135, 0.37 )',
         backdropFilter: 'blur( 7px )',
-     
+        overflow: 'none',
         borderRadius: '10px',
         border: '1px solid rgba( 255, 255, 255, 0.18 )'
       },

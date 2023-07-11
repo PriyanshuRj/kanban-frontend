@@ -6,18 +6,18 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Dropdown({inputList, labelTitle, DivWidth="Full", selected, setSelected}) {
+export default function Dropdown({inputList, DivWidth, selected, setSelected}) {
   return (
     <Listbox value={selected} onChange={async (value)=>{
       setSelected(value)
       }} >
       {({ open }) => (
-        <div className={`flex flex-col items-start w-${DivWidth} `}>
-          <Listbox.Label className="block text-sm font-medium text-gray-700">{labelTitle}</Listbox.Label>
+        <div className={`flex flex-col items-start  w-${DivWidth} `} style={{width: DivWidth}}>
+
           <div className="relative w-full mt-1">
-            <Listbox.Button className={`relative w-${DivWidth} py-4 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm`}>
+            <Listbox.Button className={`relative w-${DivWidth} py-2 pl-3 pr-10 text-left bg-white border border-gray-300 rounded-md shadow-sm cursor-default focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm`} style={{width: DivWidth}}>
               <span className="flex items-center">
-                <span className="block ml-3 truncate">{selected}</span>
+                <span className="block ml-3 truncate">{selected.title}</span>
               </span>
               <span className="absolute inset-y-0 right-0 flex items-center pr-2 ml-3 pointer-events-none">
                 <ChevronUpDownIcon className="w-5 h-5 text-gray-400" aria-hidden="true" />
@@ -49,7 +49,7 @@ export default function Dropdown({inputList, labelTitle, DivWidth="Full", select
                           <span
                             className={classNames(selected ? 'font-semibold' : 'font-normal', 'ml-3 block truncate')}
                           >
-                            {item}
+                            {item.title}
                           </span>
                         </div>
 

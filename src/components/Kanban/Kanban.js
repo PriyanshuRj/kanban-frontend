@@ -1,18 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { AddSquare } from 'iconsax-react';
-import { lists,  } from '../../helpers/kanbarData';
+import { lists } from '../../helpers/kanbarData';
 import { styles } from '../../helpers/modalStyle';
 import Modal from 'react-modal';
 import AddSection from '../Modals/AddSection';
 import AddTask from '../Modals/AddTask';
 import Section from './Section';
+import { useSelector } from 'react-redux';
 export default function Kanban({boardId}) {
-
-  const [data, setData] = useState(lists);
+  const board = useSelector(state=>state.board.board);
+  console.log(board)
+  const [data, setData] = useState([]);
   const [sectionModalState, setSectionModalState] = useState(false);
   const [taskModalState, setTasknModalState] = useState(false);
-  const [sectionId, setSectionId] = useState("");
+  const [currentSection, setCurrentSection] = useState(data ? data: null);
+  useEffect(()=>{
+    if(board.sections && board.sections.length)
+      setData(board.sections);
+    else setData([])
+  },[board])
   function closeSectionModal(){
     setSectionModalState(false);
   }
@@ -46,10 +53,10 @@ export default function Kanban({boardId}) {
       data[destinationColIndex].tasks = destinationTasks
     }
   }
-  async function addTask(sectionId) {
+  async function addTask(section) {
     try {
-      setSectionId(sectionId);
       openTaskModal();
+      setCurrentSection(section)
       // const newData = [...data]
       // const index = newData.findIndex(e => e.id === sectionId)
       // const task = {
@@ -93,12 +100,16 @@ export default function Kanban({boardId}) {
         style={styles}
         contentLabel="Add Project Modal"
       >
-        <AddTask modalState={taskModalState} sectionId={sectionId} AddNewSection={AddNewSection} />
+        <div className='relative'>
+
+        <AddTask modalState={taskModalState} sections={data} currentSection={currentSection} closeTaskModal={closeTaskModal} />
+       
+        </div>
       </Modal>
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className='flex flex-col sm:flex-row justify-between w-full gap-8 mr-8'>
+        <div className='flex flex-col sm:flex-row justify-between w-full gap-8 mr-8 min-h-[20rem]'>
           {
-            data.map(section => (
+            data && data.map(section => (
               <div key={section.id} className='w-full bg-[#F5F5F5] rounded-xl p-4 shadow-slate-300 shadow-md  h-min min-w-[24.2rem] '>
                 <Section section={section} addTask={addTask} />
               </div>

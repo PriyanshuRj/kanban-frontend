@@ -46,12 +46,12 @@ code {
   }
 }
 
-.hide-scrollbar::-webkit-scrollbar {
+.hide-scrollbar::-webkit-scrollbar, .ReactModal__Overlay::-webkit-scrollbar  {
   display: none;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
-.hide-scrollbar {
+.hide-scrollbar, .ReactModal__Overlay {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }

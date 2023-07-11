@@ -34,13 +34,13 @@ export default function TaskCard({ task, index }) {
                             {task.content && <p className="content text-[0.75rem] text-[#787486]" dangerouslySetInnerHTML={{ __html: task.content }} />}
                             <div className='flex flex-row justify-between gap-3'>
 
-                                {task.picture.map((pic, index) => {
+                                {task.picture && task.picture.map((pic, index) => {
                                     return <img key={index} className='w-full h-auto object-fill min-w-[4rem]' src={pic} alt="task" />
                                 })}
                             </div>
                             <div className='flex flex-row justify-between mt-5'>
                                 <div className='flex flex-row'>
-                                    {task.assignies.map((assignie, index) => {
+                                    {task.assignies && task.assignies.map((assignie, index) => {
                                         return <img className={`h-6 w-6 ${index && '-ml-2'} `} style={{ zIndex: task.assignies.length - index }} key={index.toString()} src={assignie} alt="assignie" />
                                     })}
                                 </div>
