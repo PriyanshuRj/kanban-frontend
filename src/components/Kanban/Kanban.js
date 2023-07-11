@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { AddSquare } from 'iconsax-react';
-import { lists } from '../../helpers/kanbarData';
+import { ValidateupdatePositions } from '../../validation/Task';
 import { styles } from '../../helpers/modalStyle';
 import Modal from 'react-modal';
 import AddSection from '../Modals/AddSection';
@@ -10,12 +10,12 @@ import Section from './Section';
 import { useSelector } from 'react-redux';
 export default function Kanban({boardId}) {
   const board = useSelector(state=>state.board.board);
-  console.log(board)
   const [data, setData] = useState([]);
   const [sectionModalState, setSectionModalState] = useState(false);
   const [taskModalState, setTasknModalState] = useState(false);
   const [currentSection, setCurrentSection] = useState(data ? data: null);
   useEffect(()=>{
+    console.log("Yes called")
     if(board.sections && board.sections.length)
       setData(board.sections);
     else setData([])
@@ -34,24 +34,32 @@ export default function Kanban({boardId}) {
   }
   async function onDragEnd({ source, destination }) {
     if (!destination) return
-    const sourceColIndex = data.findIndex(e => e.id === source.droppableId)
-    const destinationColIndex = data.findIndex(e => e.id === destination.droppableId)
-    const sourceCol = data[sourceColIndex]
-    const destinationCol = data[destinationColIndex]
+    var newTaskData = [...data];
+    const sourceColIndex = newTaskData.findIndex(e => e.id === source.droppableId)
+    const destinationColIndex = newTaskData.findIndex(e => e.id === destination.droppableId)
+    const sourceCol = newTaskData[sourceColIndex]
+    const destinationCol = newTaskData[destinationColIndex]
 
     const sourceTasks = [...sourceCol.tasks]
     const destinationTasks = [...destinationCol.tasks]
 
     if (source.droppableId !== destination.droppableId) {
       const [removed] = sourceTasks.splice(source.index, 1)
-      destinationTasks.splice(destination.index, 0, removed)
-      data[sourceColIndex].tasks = sourceTasks
-      data[destinationColIndex].tasks = destinationTasks
+      destinationTasks.splice(destination.index, 0, removed);
+      console.log(newTaskData[sourceColIndex].tasks, newTaskData[sourceColIndex]._id)
+      const sourceSection = {...newTaskData[sourceColIndex], tasks:sourceTasks}
+      newTaskData[sourceColIndex] = sourceSection
+      const destinationSection = {...newTaskData[destinationColIndex], tasks:destinationTasks}
+      newTaskData[destinationColIndex] = destinationSection
+      
     } else {
       const [removed] = destinationTasks.splice(source.index, 1)
       destinationTasks.splice(destination.index, 0, removed)
-      data[destinationColIndex].tasks = destinationTasks
+      const destinationSection = {...newTaskData[destinationColIndex], tasks:destinationTasks}
+      newTaskData[destinationColIndex] = destinationSection
     }
+    setData(newTaskData);
+    ValidateupdatePositions(newTaskData[sourceColIndex].tasks,newTaskData[destinationColIndex].tasks, newTaskData[sourceColIndex]._id, newTaskData[destinationColIndex]._id);
   }
   async function addTask(section) {
     try {

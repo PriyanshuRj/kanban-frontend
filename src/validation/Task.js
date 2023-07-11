@@ -1,5 +1,5 @@
 import {  toast } from 'react-toastify';
-import { createTaskService } from '../services/taskService';
+import { createTaskService, updatePositions } from '../services/taskService';
 export default async function validateTask(title, sectionId, priority, deadline, content, taskImages,position){
 
     if(title.length < 2){
@@ -77,7 +77,30 @@ export default async function validateTask(title, sectionId, priority, deadline,
         });
         return false;
     }
-    
-    
-    
+}
+
+export async function ValidateupdatePositions(resourceList,
+    destinationList,
+    resourceSectionId,
+    destinationSectionId){
+        console.log(destinationList);
+        const res = await updatePositions({resourceList,
+            destinationList,
+            resourceSectionId,
+            destinationSectionId});
+        if(res.status !== 200){
+            toast.error("Unable to update Positions", { 
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+            return false;
+        }
+      
+       
 }

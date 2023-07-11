@@ -15,3 +15,16 @@ export async function createTaskService(data, sectionId){
         return [];
     }
 }
+
+export async function updatePositions(data){
+    try{
+        const res = await axios.put(API_URL + `task/updatePositions`, data ,{
+            headers : headers
+        });
+        
+        return res;
+    }
+    catch(error){
+        return [];
+    }
+}

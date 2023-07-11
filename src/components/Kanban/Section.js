@@ -26,7 +26,10 @@ export default function Section({ section, addTask }) {
                     <div>
                         {
                             section && section.tasks && section.tasks.map((task, index) => (
+                                <div key={task._id}>
+
                                 <TaskCard task={task} index={index} />
+                                </div>
                             ))
                         }
                     </div>

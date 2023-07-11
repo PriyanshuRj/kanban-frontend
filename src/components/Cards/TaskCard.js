@@ -5,7 +5,7 @@ import { Message, FolderMinus } from 'iconsax-react';
 import { priorityColor } from '../../helpers/kanbarData'
 export default function TaskCard({ task, index }) {
     return (
-        <Draggable key={task.id} draggableId={task.id} index={index}>
+        <Draggable key={task._id} draggableId={task.id} index={index}>
             {(provided, snapshot) => (
                 <div key={task.id}>
                     <div
