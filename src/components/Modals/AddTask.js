@@ -15,7 +15,7 @@ const priorityList = [{ id: "Low", title: "Low" },
 { id: "Medium", title: "Medium" },
 { id: "High", title: "High" }
 ]
-export default function AddTask({ sections, modalState, closeTaskModal, currentSection }) {
+export default function AddTask({ sections, modalState, closeTaskModal, currentSection, afterAddTask }) {
   const board = useSelector(state => state.board.board);
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
@@ -27,11 +27,16 @@ export default function AddTask({ sections, modalState, closeTaskModal, currentS
   const [taskFiles, setTaskFiles] = useState(null);
 
   const editorWrapperRef = useRef();
-  async function createSection() {
+  async function createTask() {
     try {
       console.log(taskFiles)
       const position = selectedSection ? selectedSection.tasks.length : 0
-      validateTask(title, selectedSection._id, priority.id, deadline, content, taskFiles,position )
+      const res = await validateTask(title, selectedSection._id, priority.id, deadline, content, taskFiles,position );
+      console.log(res);
+      if(res.status===201){
+        console.log(res.data.task);
+        afterAddTask(res.data.task)
+      }
     } catch (e) {
       console.warn("error ", e);
     }
@@ -153,7 +158,7 @@ export default function AddTask({ sections, modalState, closeTaskModal, currentS
           />
         </div>
         <div className="flex items-center justify-between">
-          <button onClick={createSection} className="bg-[#5030E5] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+          <button onClick={createTask} className="bg-[#5030E5] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
             Create
           </button>
         </div>

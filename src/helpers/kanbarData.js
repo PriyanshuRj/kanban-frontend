@@ -10,9 +10,14 @@ const design = process.env.PUBLIC_URL + "/design.png";
 const boardId = '1-Mobile-App';
 export const priorityColor = {
     "Low": {
-      bg: "rgba(223, 168, 116,0.2)",
-      text: "#D58D49",
+      bg: "rgba(139, 196, 138,0.2)",
+      text: "#8BC48A",
     },
+    "Medium": {
+        bg: "rgba(223, 168, 116,0.2)",
+        text: "#D58D49",
+    
+      },
     "High": {
       bg: "rgba(216, 114, 125,0.1)",
       text: "#D8727D"

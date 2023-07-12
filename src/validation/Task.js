@@ -34,10 +34,10 @@ export default async function validateTask(title, sectionId, priority, deadline,
     formData.append("sectionId",sectionId);
     formData.append("deadline",deadline);
     formData.append("position",position);
-    for (const image of taskImages) {
-        formData.append("files",image,image.name);
-        console.log(image)
-      }
+    if(taskImages) 
+        for (const image of taskImages) {
+            formData.append("files",image,image.name);
+        }
     
     for (const pair of formData.entries()) {
         console.log(`${pair[0]}, ${pair[1]}`);
@@ -83,7 +83,6 @@ export async function ValidateupdatePositions(resourceList,
     destinationList,
     resourceSectionId,
     destinationSectionId){
-        console.log(destinationList);
         const res = await updatePositions({resourceList,
             destinationList,
             resourceSectionId,

@@ -1,9 +1,36 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Droppable } from 'react-beautiful-dnd'
 import TaskCard from '../Cards/TaskCard'
 import { AddSquare } from 'iconsax-react';
-export default function Section({ section, addTask }) {
+import { Rings } from 'react-loader-spinner';
+export default function Section({ section, openAddTaskModal }) {
+    const [sectionTasks, setSectionTasks] = useState(section.tasks);
+    const [loading, setLoading] = useState(true);
+    function sortTask(a,b){
+        return b.position - a.position;
+    }
+    useEffect(()=>{
+        if(section.tasks){
+            var newTasks = [...section.tasks];
+            newTasks = newTasks.sort(sortTask)
+            setSectionTasks(newTasks);
+            setLoading(false);
+        }
+    },[section])
+    
     return (
+        <>
+        {loading ? (
+      <div className="flex items-center justify-center h-32">
+        <Rings
+          height="220"
+          width="220"
+          // radius="9"
+          color="rgb(30 64 175)"
+          ariaLabel="loading"
+          />{" "}
+      </div>
+    ) : (
         <Droppable key={section.id} droppableId={section.id}>
             {(provided) => (
                 <div className='headerList'
@@ -20,12 +47,12 @@ export default function Section({ section, addTask }) {
                         <section>
                             <AddSquare
                                 size="24" color={section.color} variant="Bulk" className='cursor-pointer'
-                                onClick={() => addTask(section)} />
+                                onClick={() => openAddTaskModal(section)} />
                         </section>
                     </span>
                     <div>
                         {
-                            section && section.tasks && section.tasks.map((task, index) => (
+                            sectionTasks &&  sectionTasks.map((task, index) => (
                                 <div key={task._id}>
 
                                 <TaskCard task={task} index={index} />
@@ -37,5 +64,7 @@ export default function Section({ section, addTask }) {
                 </div>
             )}
         </Droppable>
+    )}
+        </>
     )
 }

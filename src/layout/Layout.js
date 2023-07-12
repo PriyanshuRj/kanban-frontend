@@ -22,7 +22,6 @@ export default function Layout({ children }) {
       setLoading(true);
       console.log("reloading")
       const user = await authUtils.isAuthenticated()
-      console.log(user)
       if (!user) {
         navigate('/login')
       } else {

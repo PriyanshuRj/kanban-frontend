@@ -9,8 +9,8 @@ export default function Sidebar({sidebarState, setSidebarOpen}) {
 
   return (
     <div className={`sidebar flex flex-col w-60 border-r-2 h-screen absolute z-10 bg-white overflow-y-scroll ${!sidebarState && 'hidden'}`}>
-      <Link to="/dashboard" className='px-4 py-6 h-[4.4rem] flex flex-row items-center justify-between border-b-2'>
-        <div className='text-md font-semibold flex flex-row items-center'>
+      <div  className='px-4 py-6 h-[4.4rem] flex flex-row items-center justify-between border-b-2'>
+        <Link to="/dashboard" className='text-md font-semibold flex flex-row items-center'>
           <Colorfilter
             size="24"
             color="#5030E5"
@@ -18,13 +18,13 @@ export default function Sidebar({sidebarState, setSidebarOpen}) {
             className='mr-2'
           />
           Project M.
-        </div>
+        </Link>
         <div className='flex flex-row cursor-pointer' onClick={()=> setSidebarOpen(false)}>
 
           <ArrowLeft2 size="20" color="#787486" variant="Outline" className='-mr-3' />
           <ArrowLeft2 size="20" color="#787486" variant="Outline" />
         </div>
-      </Link>
+      </div>
       <div className="relative w-[26rem] flex md:hidden py-3 px-2 border-b-2">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <SearchNormal1 size="22" color="#787486" />

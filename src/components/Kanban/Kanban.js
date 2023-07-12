@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { DragDropContext } from 'react-beautiful-dnd'
 import { AddSquare } from 'iconsax-react';
 import { ValidateupdatePositions } from '../../validation/Task';
 import { styles } from '../../helpers/modalStyle';
@@ -8,17 +8,22 @@ import AddSection from '../Modals/AddSection';
 import AddTask from '../Modals/AddTask';
 import Section from './Section';
 import { useSelector } from 'react-redux';
+import { Rings } from 'react-loader-spinner';
 export default function Kanban({boardId}) {
   const board = useSelector(state=>state.board.board);
   const [data, setData] = useState([]);
   const [sectionModalState, setSectionModalState] = useState(false);
   const [taskModalState, setTasknModalState] = useState(false);
   const [currentSection, setCurrentSection] = useState(data ? data: null);
+
   useEffect(()=>{
-    console.log("Yes called")
-    if(board.sections && board.sections.length)
+    if(board.sections && board.sections.length){
       setData(board.sections);
-    else setData([])
+    }
+    else {
+      setData([]);
+    }
+    
   },[board])
   function closeSectionModal(){
     setSectionModalState(false);
@@ -46,7 +51,6 @@ export default function Kanban({boardId}) {
     if (source.droppableId !== destination.droppableId) {
       const [removed] = sourceTasks.splice(source.index, 1)
       destinationTasks.splice(destination.index, 0, removed);
-      console.log(newTaskData[sourceColIndex].tasks, newTaskData[sourceColIndex]._id)
       const sourceSection = {...newTaskData[sourceColIndex], tasks:sourceTasks}
       newTaskData[sourceColIndex] = sourceSection
       const destinationSection = {...newTaskData[destinationColIndex], tasks:destinationTasks}
@@ -61,36 +65,30 @@ export default function Kanban({boardId}) {
     setData(newTaskData);
     ValidateupdatePositions(newTaskData[sourceColIndex].tasks,newTaskData[destinationColIndex].tasks, newTaskData[sourceColIndex]._id, newTaskData[destinationColIndex]._id);
   }
-  async function addTask(section) {
+  function openAddTaskModal(section){
+    openTaskModal();
+    setCurrentSection(section)
+  }
+  async function addTask(task) {
     try {
-      openTaskModal();
-      setCurrentSection(section)
-      // const newData = [...data]
-      // const index = newData.findIndex(e => e.id === sectionId)
-      // const task = {
-      //   section: boardId + sectionId,
-      //   id: sectionId + boardId + newData[index].tasks.length.toString(),
-      //   position: newData[index].tasks.length.toString(),
-      //   title: 'New Task',
-      //   content: 'Very good task',
-      //   priority: "Low",
-      //   comments: 0,
-      //   file: 0,
-      //   assignies: [],
-      //   picture: [],
-
-
-      // }
+ 
+      const newData = [...data]
+      const index = newData.findIndex(e => e.id === task.section)
+      const sourceTasks = [task, ...newData[index].tasks]
+      const sourceSection = {...newData[index], tasks:sourceTasks}
+      newData[index] = sourceSection
       // newData[index].tasks.unshift(task)
-      // setData(newData)
+      console.log(newData)
+      setData(newData)
     } catch (err) {
-      console.error('error in creating')
+      console.error('error in creating',err)
     }
   }
   function AddNewSection(section){
     setData([...data, section])
   }
   return (
+   
     <div className='flex mt-8 w-full pr-4 md:pr-10  '>
        <Modal
         isOpen={sectionModalState}
@@ -110,18 +108,21 @@ export default function Kanban({boardId}) {
       >
         <div className='relative'>
 
-        <AddTask modalState={taskModalState} sections={data} currentSection={currentSection} closeTaskModal={closeTaskModal} />
+        <AddTask modalState={taskModalState} sections={data} afterAddTask={addTask} currentSection={currentSection} closeTaskModal={closeTaskModal} />
        
         </div>
       </Modal>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className='flex flex-col sm:flex-row justify-between w-full gap-8 mr-8 min-h-[20rem]'>
           {
-            data && data.map(section => (
-              <div key={section.id} className='w-full bg-[#F5F5F5] rounded-xl p-4 shadow-slate-300 shadow-md  h-min min-w-[24.2rem] '>
-                <Section section={section} addTask={addTask} />
+            data && data.map(section => 
+              {
+                console.log(section)
+                return <div key={section.id} className='w-full bg-[#F5F5F5] rounded-xl p-4 shadow-slate-300 shadow-md  h-min min-w-[24.2rem] '>
+                <Section section={section} openAddTaskModal={openAddTaskModal}/>
               </div>
-            ))
+              }
+            )
           }
           <div className='min-w-[26rem] flex'>
 

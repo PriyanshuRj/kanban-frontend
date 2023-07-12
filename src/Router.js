@@ -5,6 +5,7 @@ import Signup from './pages/signup'
 import VerifyOTP from './pages/verifyOTP'
 import LandingPage from './pages/LandingPage'
 import Dashboard from './pages/Dashboard'
+import Invite from './pages/Invite'
 export function Router() {
     return (
       <BrowserRouter>
@@ -16,6 +17,7 @@ export function Router() {
 
         <Route path="/boards" element={<Board/>} />
         <Route path="/boards/:boardId" element={<Board />} />
+        <Route path="/invite/:inviteId" element={<Invite />} />
         <Route path="/" element={<LandingPage />} />
    
         </Routes>

@@ -1,9 +1,22 @@
 import { Draggable } from 'react-beautiful-dnd'
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { Message, FolderMinus } from 'iconsax-react';
-
+import { ValidategetImages } from '../../validation/Images';
 import { priorityColor } from '../../helpers/kanbarData'
+
+const loader = process.env.PUBLIC_URL + "/loading.svg";
+
 export default function TaskCard({ task, index }) {
+    const [taskImages, setTaskImages] = useState(task.taskImages);
+    async function getTaskImages(){
+        const res = await ValidategetImages(task.taskImages);
+        if(res){
+            setTaskImages(res.data.images);
+        }
+    }
+    useEffect(()=>{
+        getTaskImages();
+    },[task])
     return (
         <Draggable key={task._id} draggableId={task.id} index={index}>
             {(provided, snapshot) => (
@@ -34,8 +47,8 @@ export default function TaskCard({ task, index }) {
                             {task.content && <p className="content text-[0.75rem] text-[#787486]" dangerouslySetInnerHTML={{ __html: task.content }} />}
                             <div className='flex flex-row justify-between gap-3'>
 
-                                {task.picture && task.picture.map((pic, index) => {
-                                    return <img key={index} className='w-full h-auto object-fill min-w-[4rem]' src={pic} alt="task" />
+                                {taskImages.map((pic, index) => {
+                                    return <img key={index} className={`w-full h-auto object-fill min-w-[4rem] ${!(pic.substring(0,4)==="data") && " h-[8rem]"}`} src={pic.substring(0,4)==="data" ? pic : loader} alt="task" />
                                 })}
                             </div>
                             <div className='flex flex-row justify-between mt-5'>
