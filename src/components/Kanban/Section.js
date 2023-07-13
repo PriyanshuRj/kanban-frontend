@@ -4,18 +4,15 @@ import TaskCard from '../Cards/TaskCard'
 import { AddSquare } from 'iconsax-react';
 import { Rings } from 'react-loader-spinner';
 export default function Section({ section, openAddTaskModal }) {
-    const [sectionTasks, setSectionTasks] = useState(section.tasks);
+    const {tasks} = section;
     const [loading, setLoading] = useState(true);
-    function sortTask(a,b){
-        return b.position - a.position;
-    }
+
     useEffect(()=>{
-        if(section.tasks){
-            var newTasks = [...section.tasks];
-            newTasks = newTasks.sort(sortTask)
-            setSectionTasks(newTasks);
+        if(section.tasks && section.tasks.length && section.tasks[0]._id){
+            console.log("yes", section.tasks[0]._id)
             setLoading(false);
         }
+        else if(section.tasks && section.tasks.length==0) setLoading(false);
     },[section])
     
     return (
@@ -52,10 +49,10 @@ export default function Section({ section, openAddTaskModal }) {
                     </span>
                     <div>
                         {
-                            sectionTasks &&  sectionTasks.map((task, index) => (
+                            tasks.map((task, index) => (
                                 <div key={task._id}>
 
-                                <TaskCard task={task} index={index} />
+                                <TaskCard task={task} index={index} section={section} />
                                 </div>
                             ))
                         }

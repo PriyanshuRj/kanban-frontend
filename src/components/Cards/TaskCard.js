@@ -3,25 +3,61 @@ import React, {useState, useEffect} from 'react'
 import { Message, FolderMinus } from 'iconsax-react';
 import { ValidategetImages } from '../../validation/Images';
 import { priorityColor } from '../../helpers/kanbarData'
-
+import ViewTask from '../Modals/Task';
+import Modal from 'react-modal';
+import { styles } from '../../helpers/modalStyle';
+import ContextMenu from '../UI/ContextMenu';
 const loader = process.env.PUBLIC_URL + "/loading.svg";
 
-export default function TaskCard({ task, index }) {
+export default function TaskCard({ task, index, section }) {
+
     const [taskImages, setTaskImages] = useState(task.taskImages);
+    const [taskViewModal, setTaskViewModal] = useState(false);
     async function getTaskImages(){
         const res = await ValidategetImages(task.taskImages);
         if(res){
             setTaskImages(res.data.images);
         }
     }
+    function openTaskView(){
+        setTaskViewModal(true);
+
+    }
+    function closeTaskModal(){
+        setTaskViewModal(false);
+    }
+    function deleteTask(){
+
+    }
+    function updateTask(){
+
+    }
+    const menuList =[
+        {title:"View Task", function: openTaskView},
+        {title:"Update Task", function: updateTask},
+        {title:"Delete Task", function: deleteTask, redZone:true},
+    
+      ]
     useEffect(()=>{
         getTaskImages();
     },[task])
     return (
+        <>
+         <Modal
+        isOpen={taskViewModal}
+        ariaHideApp={false}
+        onRequestClose={closeTaskModal}
+        style={styles}
+        contentLabel="Add Project Modal"
+      >
+        <ViewTask  closeTaskModal={closeTaskModal} task={task} section={section} taskImages={taskImages}/>
+      </Modal>
         <Draggable key={task._id} draggableId={task.id} index={index}>
-            {(provided, snapshot) => (
-                <div key={task.id}>
+            {(provided, snapshot) => {
+                return <div key={task.id}>
                     <div
+                    className='cursor-pointer'
+                    style={{cursor:  'pointer!important'}}
                         ref={provided.innerRef}
                         {...provided.dragHandleProps}
                         {...provided.draggableProps}
@@ -29,11 +65,12 @@ export default function TaskCard({ task, index }) {
                             cursor: snapshot.isDragging ? 'grab' : 'pointer!important'
                         }}
                     >
-                        <section className='flex flex-col bg-white p-4 rounded-xl my-4 shadow-slate-300 shadow'>
+                        <section  className='cursor-pointer flex flex-col bg-white p-4 rounded-xl my-4 shadow-slate-300 shadow'>
                             <div className='flex flex-row justify-between'>
                                 <span style={{ color: priorityColor[task.priority]["text"], background: priorityColor[task.priority]["bg"] }} className='text-[0.75rem] py-[0.2rem] px-[0.32rem] rounded'>
                                     {task.priority}
                                 </span>
+                                <ContextMenu menuList={menuList}>
                                 <svg className='h-4' fill="#000000" version="1.1" id="Capa_1" viewBox="0 0 32.055 32.055">
                                     <g>
                                         <path d="M3.968,12.061C1.775,12.061,0,13.835,0,16.027c0,2.192,1.773,3.967,3.968,3.967c2.189,0,3.966-1.772,3.966-3.967
@@ -42,6 +79,7 @@ export default function TaskCard({ task, index }) {
                       c0,2.19,1.774,3.965,3.969,3.965c2.188,0,3.965-1.772,3.965-3.965S30.278,12.061,28.09,12.061z"/>
                                     </g>
                                 </svg>
+                                </ContextMenu>
                             </div>
                             <div className="headerCard"><h2 className='text-[1.1rem] text-[#0D062D] font-semibold my-1'>{task.title === '' ? 'No Title' : task.title}</h2></div>
                             {task.content && <p className="content text-[0.75rem] text-[#787486]" dangerouslySetInnerHTML={{ __html: task.content }} />}
@@ -81,7 +119,8 @@ export default function TaskCard({ task, index }) {
                         </section>
                     </div>
                 </div>
-            )}
+            }}
         </Draggable>
+        </>
     )
 }

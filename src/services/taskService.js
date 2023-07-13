@@ -28,3 +28,15 @@ export async function updatePositions(data){
         return [];
     }
 }
+export async function asigneeTaskService(data, taskId){
+    try{
+        const res = await axios.post(API_URL + `task/asigne?taskId=${taskId}`, data ,{
+            headers : headers
+        });
+        
+        return res;
+    }
+    catch(error){
+        return [];
+    }
+}

@@ -1,8 +1,6 @@
 import React, { useState, useRef } from 'react'
-import { addProject } from '../../redux/features/projectSlice'
 import validateTask from '../../validation/Task';
 import { useDispatch, useSelector } from 'react-redux';
-import { BlockPicker } from 'react-color';
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { CloseCircle, Calendar1, DocumentUpload } from 'iconsax-react';

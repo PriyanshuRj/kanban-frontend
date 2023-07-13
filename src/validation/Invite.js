@@ -185,7 +185,4 @@ export async function ValidateSendInvite(email, projectId, username){
         });
         return false;
     }
-    
-    
-    
 }

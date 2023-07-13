@@ -49,7 +49,7 @@ export default function Kanban({boardId}) {
     const destinationTasks = [...destinationCol.tasks]
 
     if (source.droppableId !== destination.droppableId) {
-      const [removed] = sourceTasks.splice(source.index, 1)
+      const [removed] = sourceTasks.splice(source.index, 1);
       destinationTasks.splice(destination.index, 0, removed);
       const sourceSection = {...newTaskData[sourceColIndex], tasks:sourceTasks}
       newTaskData[sourceColIndex] = sourceSection
@@ -77,7 +77,6 @@ export default function Kanban({boardId}) {
       const sourceTasks = [task, ...newData[index].tasks]
       const sourceSection = {...newData[index], tasks:sourceTasks}
       newData[index] = sourceSection
-      // newData[index].tasks.unshift(task)
       console.log(newData)
       setData(newData)
     } catch (err) {
