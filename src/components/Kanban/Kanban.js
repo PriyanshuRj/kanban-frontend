@@ -8,7 +8,7 @@ import AddSection from '../Modals/AddSection';
 import AddTask from '../Modals/AddTask';
 import Section from './Section';
 import { useSelector } from 'react-redux';
-import { Rings } from 'react-loader-spinner';
+
 export default function Kanban({boardId}) {
   const board = useSelector(state=>state.board.board);
   const [data, setData] = useState([]);
@@ -117,7 +117,6 @@ export default function Kanban({boardId}) {
           {
             data && data.map(section => 
               {
-                console.log(section)
                 return <div key={section.id} className='w-full bg-[#F5F5F5] rounded-xl p-4 shadow-slate-300 shadow-md  h-min min-w-[24.2rem] '>
                 <Section section={section} openAddTaskModal={openAddTaskModal}/>
               </div>

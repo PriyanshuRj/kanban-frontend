@@ -3,6 +3,9 @@ import Kanban from '../components/Kanban/Kanban'
 import Layout from '../layout/Layout'
 import { useNavigate, useParams} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import Modal from 'react-modal';
+import SendInvite from '../components/Modals/sendInvite'
+import { styles } from '../helpers/modalStyle'
 import { Link1, AddSquare, Filter, ArrowDown2, Calendar1, Profile2User, Pause, Menu } from 'iconsax-react';
 import { getSingleProject } from '../services/projectService'
 import { setBoards } from '../redux/features/boardSlice'
@@ -25,10 +28,26 @@ export default function Board() {
     fetchAndSetProject();
   },[boardId])
   const board = useSelector(state=>state.board.board);
-  
+  const userData = useSelector((state)=> state.user.value);
   const [viewTyle, setViewType] = useState("list");
+  const [inviteModalOpen, setInviteModalOpen] = useState(false);
+  function openInviteModal(){
+    setInviteModalOpen(true)
+  }
+  function closeInviteModal(){
+    setInviteModalOpen(false)
+  }
   return (
     <Layout>
+        <Modal
+        isOpen={inviteModalOpen}
+        ariaHideApp={false}
+        onRequestClose={closeInviteModal}
+        style={styles}
+        contentLabel="Add Project Modal"
+      >
+        <SendInvite />
+      </Modal>
       <div className='flex flex-col mt-10 md:ml-10 ml-4'>
         <div className='flex flex-col md:mr-10 mr-4 justify-center'>
           <div className='flex flex-row w-full justify-between items-center'>
@@ -62,7 +81,7 @@ export default function Board() {
                 />
               </div>
             </div>
-            <div className='flex flex-row'>
+            {board.owner === userData._id && <div onClick={openInviteModal} className='flex flex-row'>
               <div className='flex flex-row items-center text-[#5030E5] font-medium sm:mr-3'>
                 <AddSquare
                   size="18"
@@ -79,7 +98,7 @@ export default function Board() {
                 <img src={user4Pic} alt="user" className='-ml-4' />
                 <div className='-ml-4 h-[2.375rem] w-[2.375rem] rounded-full bg-[#F4D7DA] text-[#D25B68] text-[0.9rem] flex justify-center items-center border border-white' >+2</div>
               </div>
-            </div>
+            </div>}
           </div>
           <div className='flex flex-row w-full justify-between items-center mt-8'>
             <div className='flex flex-row items-center'>
