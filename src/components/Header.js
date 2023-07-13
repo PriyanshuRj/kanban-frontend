@@ -1,11 +1,28 @@
 import React from 'react'
 import { SearchNormal1, Calendar2, MessageQuestion, Notification, ArrowDown2 } from 'iconsax-react';
 import { useSelector } from 'react-redux';
+import ContextMenu from './UI/ContextMenu';
+import { useNavigate } from 'react-router';
 const profilePicture = process.env.PUBLIC_URL + "/user1.png";
 
 export default function Header() {
+  const navigate = useNavigate();
   const userData = useSelector((state)=> state.user.value);
+
   const {name, mobileno} = userData;
+  function logout(){
+    console.log("Logout")
+    localStorage.removeItem("token");
+    navigate("/");
+  }
+  function viewProfile(){
+    
+  }
+  const menuList =[
+    {title:"View Profile", function: viewProfile},
+    {title:"Logout", function: logout, redZone:true},
+
+  ]
   return (
     <div className='flex flex-row justify-end md:justify-between h-[4.4rem] py-3 pl-8 border-b-2 pr-8'>
       <div className="relative w-[26rem] hidden md:flex">
@@ -20,6 +37,8 @@ export default function Header() {
           <MessageQuestion size="24" color="#787486" className='mr-6' />
           <Notification size="24" color="#787486" className='mr-8' />
         </div>
+        <ContextMenu menuList={menuList}>
+
         <div className='flex flex-row'>
           <div className='flex flex-col justify-end items-end mr-5'>
             <p className='text-base text-[#0D062D]'>{name}</p>
@@ -32,6 +51,7 @@ export default function Header() {
             <ArrowDown2 size="18" color="#292D32" className='ml-2' />
           </div>
         </div>
+        </ContextMenu>
       </div>
     </div>
   )

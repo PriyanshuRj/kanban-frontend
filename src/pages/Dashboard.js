@@ -43,7 +43,7 @@ export default function Dashboard() {
       </div>
       <div className='flex flex-col mt-10 md:mx-10 mx-4 h-full md:mb-10 mb-4'>
         {projectList.length ? 
-        <div className='flex flex-row'>
+        <div className='flex flex-row flex-wrap'>
         {projectList.map((card,index)=> {
           return  <ProjectCard card={card}/>
          
