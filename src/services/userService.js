@@ -38,3 +38,15 @@ export async function getProfileService(){
         return [];
     }
 }
+export async function addProfilePictureService(data){
+    try{
+        headers['Content-Type'] = 'multipart/form-data'
+        const res = await axios.put(URL + "profile/profilepicture",data,{
+            headers : headers
+        });
+        return res;
+    }
+    catch(error){
+        return [];
+    }
+}

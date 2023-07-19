@@ -10,7 +10,8 @@ const loader = process.env.PUBLIC_URL + "/loading.svg";
 const asignieProfilePicture = process.env.PUBLIC_URL + "/user1.png";
 
 export default function ViewTask({ task, section, closeTaskModal, taskImages }) {
-    const [asignee, setAsignee] = useState(task.assignies.lenngth ? {...task.assignies[0], title: task.assignies[0].name} : { title: 'No One Assigned' });
+    console.log(task.assignies)
+    const [asignee, setAsignee] = useState(task.assignies.length ? {...task.assignies[0], title: task.assignies[0].name} : { title: 'No One Assigned' });
     const [selectAsignee, setSelectAsignee] = useState(false);
     const board = useSelector((state) => state.board.board)
     const membersList = board.members.map((member) => { return { ...member, title: member.name } })
@@ -99,7 +100,7 @@ export default function ViewTask({ task, section, closeTaskModal, taskImages }) 
 
                 </div>
             </div>
-            <div class="flex items-center justify-center w-full my-6">
+            <div className="flex items-center justify-center w-full my-6">
                 <div className='flex flex-row justify-between gap-3'>
 
                     {taskImages.map((pic, index) => {

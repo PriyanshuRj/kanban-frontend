@@ -8,15 +8,13 @@ export default function ProjectCard({ card }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     function navigateToProject(){
-        console.log("Called")
         dispatch(setBoards(card))
         navigate(`/boards/${card._id}`);
       }
-    console.log(card)
 
     return (
 
-        <div onClick={navigateToProject} className='shadow-lg backdrop-blur bg-opacity-50 p-4 rounded-lg border m-4 w-[30%] cursor-pointer hover:shadow-2xl duration-100 ease-in-out'>
+        <div onClick={navigateToProject} className='shadow-lg backdrop-blur bg-opacity-50 p-4 rounded-lg border w-full my-5 md:m-4 sm:w-[45%] lg:w-[30%] cursor-pointer hover:shadow-2xl duration-100 ease-in-out'>
             <div className='flex flex-row items-center justify-between mb-4'>
                 <span className='p-2 bg-[#5030E5] rounded-md bg-opacity-25'>
                     <Folder2

@@ -47,7 +47,7 @@ export default function Header() {
             </p>
           </div>
           <div className='flex flex-row items-center'>
-            <img src={profilePicture} alt="profile"/>
+            <img src={userData.profilePicture ? userData.profilePicture : profilePicture} className='h-10 w-10 rounded-full object-cover' alt="profile"/>
             <ArrowDown2 size="18" color="#292D32" className='ml-2' />
           </div>
         </div>

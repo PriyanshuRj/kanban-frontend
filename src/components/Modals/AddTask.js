@@ -113,20 +113,20 @@ export default function AddTask({ sections, modalState, closeTaskModal, currentS
             </div>}
           </div>
         </div>
-        <div class="flex items-center justify-center w-full my-6">
-          <label class="flex flex-col rounded-lg border-2 border-dashed w-full p-10 py-5 group text-center">
-            <div class="h-full w-full text-center flex flex-col items-center justify-center items-center  ">
+        <div className="flex items-center justify-center w-full my-6">
+          <label className="flex flex-col rounded-lg border-2 border-dashed w-full p-10 py-5 group text-center">
+            <div className="h-full w-full text-center flex flex-col items-center justify-center items-center  ">
 
-              <div class="flex flex-auto mx-auto mb-2">
+              <div className="flex flex-auto mx-auto mb-2">
                 <DocumentUpload
                   size="40"
                   color="#5030E5"
                   variant="Bulk"
                 />
               </div>
-              <p class="pointer-none text-gray-500 "><span class="text-sm">Drag and drop</span> files here <br /> or <a href="" id="" class="text-blue-600 hover:underline">select a file</a> from your computer</p>
+              <p className="pointer-none text-gray-500 "><span className="text-sm">Drag and drop</span> files here <br /> or <a href="" id="" className="text-blue-600 hover:underline">select a file</a> from your computer</p>
             </div>
-            <input type="file" class="hidden"
+            <input type="file" className="hidden"
             onChange={(e) => {
               if(e.target.files[0].type.substring(0,5)==="image")  {
                if(e.target.files[0].size < 1000000) setTaskFiles(e.target.files);
