@@ -13,12 +13,12 @@ export default function Projects() {
       dispatch(setModalState(true));
     }
   return (
-    <div>
-        <div className='flex flex-col mt-10 md:ml-10 ml-4'>
+    <div className=''>
+        <div className=' flex flex-col mt-10 md:ml-10 ml-4'>
         <div className='flex flex-col md:mr-10 mr-4 justify-center'>
           <div className='flex flex-row w-full justify-between items-center'>
             <div className='flex flex-row items-center'>
-              <p className='text-3xl md:text-4xl lg:text-[2.875rem] font-semibold'>Your Projects</p>
+              <p className='text-3xl md:text-4xl lg:text-[2.875rem] font-semibold dark:text-white'>Your Projects</p>
 
 
             </div>

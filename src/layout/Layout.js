@@ -64,7 +64,7 @@ export default function Layout({ children }) {
         <ArrowRight2 size="20" color="#787486" variant="Outline" className='-mr-3' />
         <ArrowRight2 size="20" color="#787486" variant="Outline" />
       </div>
-      <div className={`mainbody h-screen overflow-y-scroll flex flex-col w-full ${sidebarState && 'lg:ml-60'}  `}>
+      <div className={`mainbody h-screen overflow-y-scroll flex flex-col w-full ${sidebarState && 'lg:ml-60'}  dark:bg-gray-800`}>
 
         <Header />
         {children}

@@ -150,7 +150,7 @@ export default function Kanban({boardId}) {
           {
             data && data.map(section => 
               {
-                return <div key={section.id} className='w-full bg-[#F5F5F5] rounded-xl p-4 shadow-slate-300 shadow-md  h-min min-w-[24.2rem] '>
+                return <div key={section.id} className='w-full dark:bg-gray-600 bg-[#F5F5F5] rounded-xl p-4 shadow-slate-300 dark:shadow-slate-700 shadow-md  h-min min-w-[24.2rem] '>
                 <Section section={section} openAddTaskModal={openAddTaskModal} openEditTask={openEditTask} filterTasks={filterTasks}/>
               </div>
               }

@@ -57,7 +57,7 @@ export default function TaskCard({ task, index, section, openEditTask, filterTas
       </Modal>
         <Draggable key={task._id} draggableId={task.id} index={index}>
             {(provided, snapshot) => {
-                return <div key={task.id}>
+                return <div key={task.id} className=' dark:text-white '>
                     <div
                     className='cursor-pointer'
                     style={{cursor:  'pointer!important'}}
@@ -68,13 +68,13 @@ export default function TaskCard({ task, index, section, openEditTask, filterTas
                             cursor: snapshot.isDragging ? 'grab' : 'pointer!important'
                         }}
                     >
-                        <section  className='cursor-pointer flex flex-col bg-white p-4 rounded-xl my-4 shadow-slate-300 shadow'>
+                        <section  className='cursor-pointer flex flex-col bg-white p-4 rounded-xl my-4 shadow-slate-300 dark:shadow-slate-700 shadow dark:bg-gray-900 dark:text-white'>
                             <div className='flex flex-row justify-between'>
                                 <span style={{ color: priorityColor[task.priority]["text"], background: priorityColor[task.priority]["bg"] }} className='text-[0.75rem] py-[0.2rem] px-[0.32rem] rounded'>
                                     {task.priority}
                                 </span>
                                 <ContextMenu menuList={menuList}>
-                                <svg className='h-4' fill="#000000" version="1.1" id="Capa_1" viewBox="0 0 32.055 32.055">
+                                <svg className='h-4 dark:fill-gray-400' fill="" version="1.1" id="Capa_1" viewBox="0 0 32.055 32.055">
                                     <g>
                                         <path d="M3.968,12.061C1.775,12.061,0,13.835,0,16.027c0,2.192,1.773,3.967,3.968,3.967c2.189,0,3.966-1.772,3.966-3.967
                       C7.934,13.835,6.157,12.061,3.968,12.061z M16.233,12.061c-2.188,0-3.968,1.773-3.968,3.965c0,2.192,1.778,3.967,3.968,3.967
@@ -84,8 +84,8 @@ export default function TaskCard({ task, index, section, openEditTask, filterTas
                                 </svg>
                                 </ContextMenu>
                             </div>
-                            <div className="headerCard"><h2 className='text-[1.1rem] text-[#0D062D] font-semibold my-1'>{task.title === '' ? 'No Title' : task.title}</h2></div>
-                            {task.content && <p className="content text-[0.75rem] text-[#787486]" dangerouslySetInnerHTML={{ __html: task.content }} />}
+                            <div className="headerCard"><h2 className='text-[1.1rem]  dark:text-white text-[#0D062D] font-semibold my-1'>{task.title === '' ? 'No Title' : task.title}</h2></div>
+                            {task.content && <p className="content text-[0.75rem] text-[#787486]  dark:text-gray-400" dangerouslySetInnerHTML={{ __html: task.content }} />}
                             <div className='flex flex-row justify-between gap-3'>
 
                                 {taskImages.map((pic, index) => {

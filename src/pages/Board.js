@@ -58,7 +58,7 @@ export default function Board() {
         <div className='flex flex-col md:mr-10 mr-4 justify-center'>
           <div className='flex flex-row w-full justify-between items-center'>
             <div className='flex flex-row items-center'>
-              <p className='text-3xl md:text-4xl lg:text-[2.875rem] font-semibold'>{board.title ? board.title : "My Project"}</p>
+              <p className='text-3xl md:text-4xl lg:text-[2.875rem] font-semibold dark:text-white'>{board.title ? board.title : "My Project"}</p>
               <div className='w-6 h-6 rounded-md bg-[#5030E5] bg-opacity-[0.2] flex justify-center items-center ml-4'>
                 <svg className='h-[0.8rem] w-[0.8rem]' viewBox="5 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <g filter="url(#filter0_d_1_611)">
@@ -108,11 +108,10 @@ export default function Board() {
           </div>
           <div className='flex flex-row w-full justify-between items-center mt-8'>
             <div className='flex flex-row items-center'>
-              <div className='border-[#787486] border  cursor-pointer rounded-md px-3 py-[0.45rem] text-[#787486] text-medium flex flex-row items-center'>
+              <div className='border-[#787486] border dark:border-gray-200 dark:text-gray-200 cursor-pointer rounded-md px-3 py-[0.45rem] text-[#787486] text-medium flex flex-row items-center'>
                 <Filter
                   size="16"
-                  color="#787486"
-                  className='drop-shadow-md md:mr-2'
+                  className='drop-shadow-md md:mr-2 text-[#787486] dark:text-gray-200'
                 />
                 <span className='hidden md:flex'>
 
@@ -120,35 +119,30 @@ export default function Board() {
                 </span>
                 <ArrowDown2
                   size="16"
-                  color="#787486"
-                  className='drop-shadow-md ml-3 mr-1 hidden md:flex'
+                  className='drop-shadow-md ml-3 mr-1 hidden md:flex text-[#787486] dark:text-gray-200'
                 />
               </div>
-              <div className='ml-3  border-[#787486] border cursor-pointer rounded-md px-3 py-[0.45rem] text-[#787486] text-medium flex flex-row items-center'>
+              <div className='ml-3  border-[#787486] border  dark:border-gray-200 dark:text-gray-200 cursor-pointer rounded-md px-3 py-[0.45rem] text-[#787486] text-medium flex flex-row items-center'>
                 <Calendar1
                   size="16"
-                  color="#787486"
-                  className='drop-shadow-md md:mr-2'
+                  className='drop-shadow-md md:mr-2  text-[#787486] dark:text-gray-200'
                 />
                 <span className='hidden md:flex'>
-
                   Today
                 </span>
                 <ArrowDown2
                   size="16"
-                  color="#787486"
-                  className='drop-shadow-md ml-3 mr-1 hidden md:flex'
+                  className='drop-shadow-md ml-3 mr-1 hidden md:flex text-[#787486] dark:text-gray-200'
                 />
               </div>
             </div>
             <div className='flex flex-row items-center'>
-              <div className='border-[#787486] border cursor-pointer rounded-md px-3 py-[0.45rem] text-[#787486] text-medium flex flex-row items-center text-[0.8rem]'>
+              <div className='border-[#787486] border dark:border-gray-200 cursor-pointer rounded-md px-3 py-[0.45rem] text-[#787486] text-medium flex flex-row items-center text-[0.8rem]'>
                 <Profile2User
                   size="16"
-                  color="#787486"
-                  className='drop-shadow-md sm:mr-2'
+                  className='drop-shadow-md sm:mr-2 text-[#787486] dark:text-gray-200 '
                 />
-                <span className='hidden sm:flex'>
+                <span className='hidden sm:flex dark:text-gray-200'>
                   Share
                 </span>
               </div>
