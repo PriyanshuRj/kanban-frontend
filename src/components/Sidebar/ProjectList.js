@@ -37,9 +37,9 @@ export default function ProjectList() {
           return <div key={index} onClick={()=>navigateToProject(item)} className={`flex flex-row items-center justify-between  py-2 px-3 font-medium rounded-md ${boardId === item._id ? 'bg-[#5030E5] bg-opacity-[0.08] text-black' : 'text-[#787486]'} hover:bg-[#5030E5] hover:bg-opacity-[0.08] cursor-pointer my-1 hover:text-black`}>
             <div className='flex flex-row items-center font-medium rounded-md'>
               <span style={{ backgroundColor: item.stateColor ? item.stateColor : sidebarColor[index%sidebarColor.length] }} className={`w-2 h-2 rounded-full mr-2`}></span>
-              <p>{item.title}</p>
+              <p className='dark:text-white'>{item.title}</p>
             </div>
-            {boardId === item._id && <svg className='h-4' fill="#000000" version="1.1" id="Capa_1" viewBox="0 0 32.055 32.055">
+            {boardId === item._id && <svg className='h-4 dark:fill-gray-200' version="1.1" id="Capa_1" viewBox="0 0 32.055 32.055">
               <g>
                 <path d="M3.968,12.061C1.775,12.061,0,13.835,0,16.027c0,2.192,1.773,3.967,3.968,3.967c2.189,0,3.966-1.772,3.966-3.967
                   C7.934,13.835,6.157,12.061,3.968,12.061z M16.233,12.061c-2.188,0-3.968,1.773-3.968,3.965c0,2.192,1.778,3.967,3.968,3.967

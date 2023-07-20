@@ -34,7 +34,7 @@ export default function Header() {
 
   ]
   return (
-    <div className='flex flex-row justify-end md:justify-between h-[4.4rem] py-3 pl-8 border-b-2 pr-8 dark:bg-gray-900 dark:text-gray-200'>
+    <div className='flex flex-row justify-end md:justify-between h-[4.4rem] py-3 pl-8 border-b-2 dark:border-gray-600 pr-8 dark:bg-gray-900 dark:text-gray-200'>
       <div className="relative w-[26rem] hidden md:flex">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
           <SearchNormal1 size="22" color="#787486" />
