@@ -16,7 +16,7 @@ export default function Header() {
     navigate("/");
   }
   function viewProfile(){
-    
+    navigate("/profile");
   }
   const menuList =[
     {title:"View Profile", function: viewProfile},

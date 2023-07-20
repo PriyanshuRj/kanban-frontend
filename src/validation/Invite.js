@@ -1,5 +1,6 @@
 import { getInvite, replyInvite, sendInvite } from '../services/inviteClient';
 import {  toast } from 'react-toastify';
+import toastStyles from '../helpers/toastStyle';
 
 function isValidEmail(email) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -14,76 +15,31 @@ export async function ValidateGetInvite(inviteId, navigate){
         return res;
     }
     else if(res.status === 205){
-        toast.error("Invite is not ment for You", { 
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
+        toast.error("Invite is not ment for You", toastStyles);
         navigate("/dashboard");
         return false;
     }
     else {
-        toast.error("Unable to get The Invite", { 
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
+        toast.error("Unable to get The Invite", toastStyles);
         return false;
     }
-      
-       
 }
 
 export async function ValidateInvite(inviteId, acepted, navigate){
     if(!inviteId) {
-        toast.error("Invite ID not found", { 
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
+        toast.error("Invite ID not found", toastStyles);
         return false;
     }
 
-    const id = toast.loading("Creating Project",{
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        })
+    const id = toast.loading("Creating Project",toastStyles)
     const res = await replyInvite({acepted},inviteId);
-    console.log({res})
+    
     if(res.status === 200){
         toast.update(id, { 
             render: "Invite Accepted", 
             type: "success",
             isLoading: false,
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light"
+            ...toastStyles
         });
         navigate("/dashboard");
         return res;
@@ -94,62 +50,25 @@ export async function ValidateInvite(inviteId, acepted, navigate){
             render: "Error Accepting Request", 
             type: "error",
             isLoading: false,
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light"
+            ...toastStyles
         });
         return false;
     }
-      
-       
 }
 
 export async function ValidateSendInvite(email, projectId, username){
 
     if(projectId.length == 0){
-        toast.warn('Project Not fonud ', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
+        toast.warn('Project Not fonud ', toastStyles);
         return false;
     }
     if(!isValidEmail(email)){
-        toast.warn('Invalid Email ', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
+        toast.warn('Invalid Email ', toastStyles);
         return false;
     }
 
-    const id = toast.loading("Sending invite",{
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        })
+    const id = toast.loading("Sending invite", toastStyles)
 
-    
     const res = await sendInvite({email, projectId, username});
     console.log(res);
     if(res.status === 201){
@@ -157,31 +76,16 @@ export async function ValidateSendInvite(email, projectId, username){
             render: "Invite Send Successful", 
             type: "success",
             isLoading: false,
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light"
+            ...toastStyles
         });
         return res;
     }
-
     else {
         toast.update(id, { 
             render: "Sending invite failed", 
             type: "error",
             isLoading: false,
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light"
+            ...toastStyles
         });
         return false;
     }

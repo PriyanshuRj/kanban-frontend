@@ -1,5 +1,6 @@
 import { getImagesService } from "../services/imageService";
 import {  toast } from 'react-toastify';
+import toastStyles from '../helpers/toastStyle';
 
 export async function ValidategetImages(images){
     if (images.length==0) return false;
@@ -8,16 +9,7 @@ export async function ValidategetImages(images){
         return res;
     }
     if(res.status !== 200){
-        toast.error("Unable to update Positions", { 
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-        });
+        toast.error("Unable to update Positions", toastStyles);
         return false;
     }
       

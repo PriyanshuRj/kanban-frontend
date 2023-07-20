@@ -1,5 +1,7 @@
 import { signupService } from "../services/userService";
 import {  toast } from 'react-toastify';
+import toastStyles from '../helpers/toastStyle';
+
 function isValidEmail(email) {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailPattern.test(email);
@@ -7,67 +9,22 @@ function isValidEmail(email) {
 
 export default async function validateSignup(email,  password,username, mobileno, sendMobileOTP , sendEmailOTP){
     if(password.length< 8){
-        toast.warn('Password should be atleast 8', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
+        toast.warn('Password should be atleast 8',toastStyles);
         return false;
     }
     if(username.length < 2){
-        toast.warn('Username should be atlest 2 units', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
+        toast.warn('Username should be atlest 2 units', toastStyles);
         return false;
     }
     if(mobileno.length !== 10){
-        toast.warn('Mobile number should be 10 digits', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
+        toast.warn('Mobile number should be 10 digits', toastStyles);
         return false;
     }
     if(!isValidEmail(email)){
-        toast.warn('Invalid Email', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
+        toast.warn('Invalid Email', toastStyles);
         return false;
     }
-    const id = toast.loading("Signing in",{
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        })
+    const id = toast.loading("Signing in",toastStyles)
 
     
     const res = await signupService({email,  password,username, mobileno, sendMobileOTP , sendEmailOTP});
@@ -77,14 +34,7 @@ export default async function validateSignup(email,  password,username, mobileno
             render: "Signup Successful", 
             type: "success",
             isLoading: false,
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light"
+            ...toastStyles
         });
         return res;
     }
@@ -94,14 +44,7 @@ export default async function validateSignup(email,  password,username, mobileno
             render: "User with this email already exist", 
             type: "warning",
             isLoading: false,
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light"
+            ...toastStyles
         });
         return false;
         
@@ -111,14 +54,7 @@ export default async function validateSignup(email,  password,username, mobileno
             render: "Signup Failed", 
             type: "error",
             isLoading: false,
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light"
+            ...toastStyles
         });
         return false;
     }

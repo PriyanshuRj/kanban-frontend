@@ -1,48 +1,24 @@
 import {  toast } from 'react-toastify';
-import { addProfilePictureService } from '../services/userService';
+import { addProfilePictureService, updateProfile } from '../services/userService';
+import toastStyles from '../helpers/toastStyle';
 export default async function validatePIP(photo){
 
     if(!photo){
-        toast.warn('Please select a picture', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
+        toast.warn('Please select a picture', toastStyles);
         return false;
     }
 
-    const id = toast.loading("Uploading Profile Picture",{
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-        })
+    const id = toast.loading("Uploading Profile Picture",toastStyles)
+  
     const formData = new FormData();
     formData.append("file",photo, photo.name);
     const res = await addProfilePictureService(formData);
-    console.log(res);
+
     if(res.status === 200){
         toast.update(id, { 
             render: "Profile Picture Updated", 
             type: "success",
-            isLoading: false,
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light"
+            ...toastStyles,
         });
         return res;
     }
@@ -52,18 +28,8 @@ export default async function validatePIP(photo){
             render: "Error in updating the profile picture", 
             type: "error",
             isLoading: false,
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light"
+            ...toastStyles,
         });
         return false;
     }
-    
-    
-    
 }

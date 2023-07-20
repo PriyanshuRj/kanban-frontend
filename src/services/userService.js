@@ -50,3 +50,14 @@ export async function addProfilePictureService(data){
         return [];
     }
 }
+export async function updateProfile(data){
+    try{
+        const res = await axios.put(URL + "profile",data,{
+            headers : headers
+        });
+        return res;
+    }
+    catch(error){
+        return [];
+    }
+}
