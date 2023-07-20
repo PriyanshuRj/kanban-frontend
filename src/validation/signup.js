@@ -58,7 +58,4 @@ export default async function validateSignup(email,  password,username, mobileno
         });
         return false;
     }
-    
-    
-    
 }

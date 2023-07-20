@@ -8,6 +8,7 @@ import Projects from '../components/Projects';
 import Modal from "react-modal";
 import { styles } from '../helpers/modalStyle';
 import UpdateProfilePicture from '../components/Modals/UpdateProfilePic';
+import UpdateProfile from '../components/Modals/UpdateProfile';
 const profilePicture = process.env.PUBLIC_URL + "/user1.png";
 
 export default function Profile() {
@@ -25,6 +26,9 @@ export default function Profile() {
   function closePIPModal(){
     setPIPModal(false);
   }
+  function closeEditModal(){
+    setEditModal(false);
+  }
 
   return (
     <Layout>
@@ -35,6 +39,14 @@ export default function Profile() {
               style={styles}
       >
         <UpdateProfilePicture closeProfileModal={closePIPModal}  />
+      </Modal>
+      <Modal
+              isOpen={editModal}
+              ariaHideApp={false}
+              onRequestClose={closeEditModal}
+              style={styles}
+      >
+        <UpdateProfile closeModal={closeEditModal}  />
       </Modal>
         <div className='flex flex-col mt-10 md:ml-10 ml-4'>
             <div className='flex flex-row'>
@@ -53,7 +65,7 @@ export default function Profile() {
                     color="#5030E5"
                     variant="Outline"
                     className='ml-10'
-                    
+                    onClick={openEditModal}
                     />
                     </div>
             <p  className='text-lg font-medium text-gray-600  mt-2'> {userData.name}</p>
