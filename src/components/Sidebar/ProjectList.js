@@ -15,7 +15,6 @@ export default function ProjectList() {
       dispatch(setModalState(true));
     }
     function navigateToProject(project){
-      console.log("Called")
       dispatch(setBoards(project))
       navigate(`/boards/${project._id}`);
     }

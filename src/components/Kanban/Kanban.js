@@ -71,15 +71,34 @@ export default function Kanban({boardId}) {
     openTaskModal();
 
   }
-  async function addTask(task) {
+  async function addTask(task, previosSectionId) {
     try {
  
       const newData = [...data]
-      const index = newData.findIndex(e => e.id === task.section)
-      const sourceTasks = [task, ...newData[index].tasks]
-      const sourceSection = {...newData[index], tasks:sourceTasks}
-      newData[index] = sourceSection
-      console.log(newData)
+      if(previosSectionId == task.section){
+        console.log("Here")
+        const index = newData.findIndex(e => e.id === task.section)
+        const sourceTasks = [...newData[index].tasks].map((sectionTask)=>{
+          if(sectionTask._id == task._id) return task;
+          else return sectionTask;
+        });
+        const sourceSection = {...newData[index], tasks:sourceTasks}
+        newData[index] = sourceSection
+
+      }
+      else {
+        if(previosSectionId){
+          const removeIndex = newData.findIndex(e => e.id === previosSectionId);
+          const tasks = [...newData[removeIndex].tasks].filter((sectionTask)=> sectionTask._id != task._id);
+          const section = {...newData[removeIndex], tasks:tasks}
+          newData[removeIndex] = section
+        }
+        console.log({task})
+        const index = newData.findIndex(e => e.id === task.section)
+        const sourceTasks = [task, ...newData[index].tasks]
+        const sourceSection = {...newData[index], tasks:sourceTasks}
+        newData[index] = sourceSection;
+      }
       setData(newData)
     } catch (err) {
       console.error('error in creating',err)

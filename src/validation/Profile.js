@@ -60,7 +60,6 @@ export async function validateProfileUpdate(email, mobileno, username, name) {
 
     const id = toast.loading("Signing in", toastStyles)
     const res = await updateProfile({ email, name, username, mobileno });
-    console.log(res);
     if (res.status === 200) {
         toast.update(id, {
             render: "Profile updated Successful",

@@ -126,7 +126,6 @@ export default function Signup() {
                       <div className="flex items-center mb-4">
                         <input onChange={(e) => {
                           setOTPState(e.target.value)
-                          console.log(otpState)
                         }
                         } id="default-radio-1" type="radio" checked={otpState === 'email'} value="email" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:bg-gray-700 dark:border-gray-600" />
                         <label htmlFor="default-radio-1" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Send OTP on Email</label>
@@ -134,7 +133,6 @@ export default function Signup() {
                       <div className="flex items-center">
                         <input id="default-radio-2" onChange={(e) => {
                           setOTPState(e.target.value)
-                          console.log(otpState)
                         }
                         } type="radio" value="mobile" checked={otpState === 'mobile'} name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300  dark:bg-gray-700 dark:border-gray-600" />
                         <label htmlFor="default-radio-2" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Send OTP on Mobile</label>

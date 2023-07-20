@@ -52,12 +52,8 @@ export default function UpdateProfilePicture({ closeProfileModal }) {
       }
       dispatch(updateProfilePicture(image));
       const res = await validatePIP(profilePictue);
-      console.log(res);
-
 
       if (res.status === 200) {
-        console.log(res.data);
-        console.log(userData)
         closeProfileModal();
       }
     } catch (e) {

@@ -30,7 +30,6 @@ export default function TaskCard({ task, index, section, openEditTask }) {
 
     }
     function updateTask(){
-        console.log("called")
         openEditTask(task, section);
     }
     const menuList =[

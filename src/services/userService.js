@@ -4,12 +4,10 @@ import headers from './axiosClient';
 
 export async function signupService(data){
     try{
-        console.log(data)
         const res = await axios.post(URL + "signup",data);
         return res;
     }
     catch(error){
-        console.log(error)
         return [];
     }
 }
@@ -29,6 +27,7 @@ export async function loginService(data){
 
 export async function getProfileService(){
     try{
+        console.log(headers)
         const res = await axios.get(URL + "profile",{
             headers : headers
         });
@@ -40,9 +39,9 @@ export async function getProfileService(){
 }
 export async function addProfilePictureService(data){
     try{
-        headers['Content-Type'] = 'multipart/form-data'
+
         const res = await axios.put(URL + "profile/profilepicture",data,{
-            headers : headers
+            headersheaders : {...headers, 'Content-Type':'multipart/form-data' }
         });
         return res;
     }

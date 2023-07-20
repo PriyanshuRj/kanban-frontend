@@ -4,9 +4,9 @@ import headers from "./axiosClient";
 
 export async function createTaskService(data, sectionId){
     try{
-        headers['Content-Type'] = 'multipart/form-data'
+
         const res = await axios.post(API_URL + `task?sectionId=${sectionId}`, data ,{
-            headers : headers
+            headers : {...headers, 'Content-Type':'multipart/form-data' }
         });
         
         return res;
@@ -44,9 +44,9 @@ export async function asigneeTaskService(data, taskId){
 
 export async function updateTaskService(data, taskId){
     try{
-        headers['Content-Type'] = 'multipart/form-data'
+
         const res = await axios.put(API_URL + `task?taskId=${taskId}`, data ,{
-            headers : headers
+            headers : {...headers, 'Content-Type':'multipart/form-data' }
         });
         
         return res;

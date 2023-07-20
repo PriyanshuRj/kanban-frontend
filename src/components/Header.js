@@ -11,7 +11,6 @@ export default function Header() {
 
   const {name, mobileno} = userData;
   function logout(){
-    console.log("Logout")
     localStorage.removeItem("token");
     navigate("/");
   }

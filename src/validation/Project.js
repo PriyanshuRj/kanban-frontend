@@ -13,7 +13,6 @@ export default async function validateProject(title,  description){
 
     
     const res = await createProjectService({title,  description});
-    console.log(res);
     if(res.status === 201){
         toast.update(id, { 
             render: "Project created", 

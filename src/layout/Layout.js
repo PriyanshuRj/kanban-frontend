@@ -20,7 +20,6 @@ export default function Layout({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       setLoading(true);
-      console.log("reloading")
       const user = await authUtils.isAuthenticated()
       if (!user) {
         navigate('/login')

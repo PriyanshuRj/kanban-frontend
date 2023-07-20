@@ -13,7 +13,6 @@ export default function Header() {
         }
         else localStorage.setItem("dark", true)
         dispatch(setTheme(!darkToggle))
-        console.log(darkToggle)
     }
   return (
     <header className="fixed w-full">

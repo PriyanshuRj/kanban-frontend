@@ -33,7 +33,6 @@ export default function UpdateProfile({ closeModal }) {
 
             }
             else {
-                console.log("Here we are", prevState)
                 dispatch(updateProfile(prevState))
 
             }

@@ -28,7 +28,6 @@ export default async function validateSignup(email,  password,username, mobileno
 
     
     const res = await signupService({email,  password,username, mobileno, sendMobileOTP , sendEmailOTP});
-    console.log(res);
     if(res.status === 201){
         toast.update(id, { 
             render: "Signup Successful", 

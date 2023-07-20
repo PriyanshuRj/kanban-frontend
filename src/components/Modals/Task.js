@@ -10,12 +10,10 @@ const loader = process.env.PUBLIC_URL + "/loading.svg";
 const asignieProfilePicture = process.env.PUBLIC_URL + "/user1.png";
 
 export default function ViewTask({ task, section, closeTaskModal, taskImages }) {
-    console.log(task.assignies)
     const [asignee, setAsignee] = useState(task.assignies.length ? {...task.assignies[0], title: task.assignies[0].name} : { title: 'No One Assigned' });
     const [selectAsignee, setSelectAsignee] = useState(false);
     const board = useSelector((state) => state.board.board)
     const membersList = board.members.map((member) => { return { ...member, title: member.name } })
-    console.log(task)
     const { title, content, priority } = task;
     const deadline = new Date(task.deadline);
     function asignTask(){

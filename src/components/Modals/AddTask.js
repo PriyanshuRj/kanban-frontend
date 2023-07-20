@@ -41,10 +41,8 @@ export default function AddTask({ sections, modalState, closeTaskModal, currentS
       var res;
       if(!currentTaskData) res = await validateTask(title, selectedSection._id, priority.id, deadline, content, taskFiles,position );
       else res = await validateUpdateTask(title, selectedSection._id, priority.id, deadline, content, taskFiles,position, currentTaskData._id );
-      console.log(res);
       if(res.status===201 || res.status==200){
-        console.log(res.data.task);
-        // afterAddTask(res.data.task)
+        afterAddTask(res.data.task, currentTaskData ? currentTaskData.section: null)
       }
     } catch (e) {
       console.warn("error ", e);

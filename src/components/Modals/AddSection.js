@@ -15,7 +15,6 @@ export default function AddSection({boardId, modalState, AddNewSection}) {
     try {
       const res = await validateSection(title,color,  boardId);
       if(res && res.data){
-        console.log("This is response ", res);
         AddNewSection(res.data.section)
         // dispatch(addProject(res.data.project))
       }

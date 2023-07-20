@@ -28,11 +28,8 @@ export default async function validateTask(title, sectionId, priority, deadline,
             formData.append("files",image,image.name);
         }
     
-    for (const pair of formData.entries()) {
-        console.log(`${pair[0]}, ${pair[1]}`);
-      }
+
     const res = await createTaskService(formData, sectionId);
-    console.log(res);
     if(res.status === 201){
         toast.update(id, { 
             render: "Task Added Successfully", 
@@ -75,7 +72,6 @@ export async function ValidateAsigneTask(asignee, taskId){
         return false;
     }
     const res = await asigneeTaskService({asignee}, taskId);
-    console.log(res);
     if(res.status === 200){
         return res;
     }
@@ -106,11 +102,8 @@ export async function validateUpdateTask(title, sectionId, priority, deadline, c
             formData.append("files",image,image.name);
         }
     
-    for (const pair of formData.entries()) {
-        console.log(`${pair[0]}, ${pair[1]}`);
-      }
+
     const res = await updateTaskService(formData, taskId);
-    console.log(res);
     if(res.status === 200){
         toast.update(id, { 
             render: "Task Updated Successfully", 

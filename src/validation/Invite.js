@@ -10,7 +10,6 @@ function isValidEmail(email) {
 export async function ValidateGetInvite(inviteId, navigate){
     if(!inviteId) return false;
     const res = await getInvite(inviteId);
-    console.log({res})
     if(res.status === 200){
         return res;
     }
@@ -70,7 +69,6 @@ export async function ValidateSendInvite(email, projectId, username){
     const id = toast.loading("Sending invite", toastStyles)
 
     const res = await sendInvite({email, projectId, username});
-    console.log(res);
     if(res.status === 201){
         toast.update(id, { 
             render: "Invite Send Successful", 
