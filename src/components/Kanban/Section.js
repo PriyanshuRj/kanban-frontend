@@ -3,7 +3,7 @@ import { Droppable } from 'react-beautiful-dnd'
 import TaskCard from '../Cards/TaskCard'
 import { AddSquare } from 'iconsax-react';
 import { Rings } from 'react-loader-spinner';
-export default function Section({ section, openAddTaskModal, openEditTask }) {
+export default function Section({ section, openAddTaskModal, openEditTask, filterTasks }) {
     const { tasks } = section;
     const [loading, setLoading] = useState(true);
 
@@ -51,7 +51,7 @@ export default function Section({ section, openAddTaskModal, openEditTask }) {
                                     tasks.map((task, index) => (
                                         <div key={task._id}>
 
-                                            <TaskCard task={task} index={index} section={section} openEditTask={openEditTask}/>
+                                            <TaskCard task={task} index={index} section={section} openEditTask={openEditTask} filterTasks={filterTasks} />
                                         </div>
                                     ))
                                 }

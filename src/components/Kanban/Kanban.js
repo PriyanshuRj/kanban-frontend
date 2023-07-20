@@ -76,7 +76,6 @@ export default function Kanban({boardId}) {
  
       const newData = [...data]
       if(previosSectionId == task.section){
-        console.log("Here")
         const index = newData.findIndex(e => e.id === task.section)
         const sourceTasks = [...newData[index].tasks].map((sectionTask)=>{
           if(sectionTask._id == task._id) return task;
@@ -113,6 +112,14 @@ export default function Kanban({boardId}) {
     setCurrentTaskData(task);
     setTaskModalState(true);
   }
+  function filterTasks(taskId, sectionId){
+    const newData = [...data];
+    const removeIndex = newData.findIndex(e => e.id === sectionId);
+    const tasks = [...newData[removeIndex].tasks].filter((sectionTask)=> sectionTask._id != taskId);
+    const section = {...newData[removeIndex], tasks:tasks}
+    newData[removeIndex] = section
+    setData(newData)
+  }
   return (
    
     <div className='flex mt-8 w-full pr-4 md:pr-10  '>
@@ -144,7 +151,7 @@ export default function Kanban({boardId}) {
             data && data.map(section => 
               {
                 return <div key={section.id} className='w-full bg-[#F5F5F5] rounded-xl p-4 shadow-slate-300 shadow-md  h-min min-w-[24.2rem] '>
-                <Section section={section} openAddTaskModal={openAddTaskModal} openEditTask={openEditTask}/>
+                <Section section={section} openAddTaskModal={openAddTaskModal} openEditTask={openEditTask} filterTasks={filterTasks}/>
               </div>
               }
             )

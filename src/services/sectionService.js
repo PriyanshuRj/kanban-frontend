@@ -14,3 +14,16 @@ export async function createSectionService(data, projectId){
         return [];
     }
 }
+
+export async function deleteSectionService(sectionId){
+    try{
+        const res = await axios.post(URL + `section?sectionId=${sectionId}` ,{
+            headers : headers
+        });
+        
+        return res;
+    }
+    catch(error){
+        return [];
+    }
+}

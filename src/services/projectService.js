@@ -26,3 +26,16 @@ export async function getSingleProject(projectId){
         return [];
     }
 }
+
+export async function deleteProject(projectId){
+    try{
+        const res = await axios.get(URL + `project?projectId=${projectId}` ,{
+            headers : headers
+        });
+        
+        return res;
+    }
+    catch(error){
+        return [];
+    }
+}

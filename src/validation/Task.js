@@ -1,5 +1,5 @@
 import {  toast } from 'react-toastify';
-import { createTaskService, updatePositions, asigneeTaskService, updateTaskService } from '../services/taskService';
+import { createTaskService, updatePositions, asigneeTaskService, updateTaskService, deleteTaskService } from '../services/taskService';
 import toastStyles from '../helpers/toastStyle';
 
 function isValidEmail(email) {
@@ -117,6 +117,34 @@ export async function validateUpdateTask(title, sectionId, priority, deadline, c
     else {
         toast.update(id, { 
             render: "Error updating Task", 
+            type: "error",
+            isLoading: false,
+            ...toastStyles
+        });
+        return false;
+    }
+}
+
+export async function ValidateDeleteTask(taskId){
+    if(!taskId){
+        toast.warn('Please provide a correct Task ', toastStyles);
+        return false;
+    }
+    
+    const id = toast.loading("Deleting Task",toastStyles)
+    const res = await deleteTaskService(taskId);
+    if(res.status===200){
+        toast.update(id, { 
+            render: "Task Deleted Successfully", 
+            type: "success",
+            isLoading: false,
+            ...toastStyles
+        });
+        return res;
+    }
+    else {
+        toast.update(id, { 
+            render: "Task Deleted Failed", 
             type: "error",
             isLoading: false,
             ...toastStyles

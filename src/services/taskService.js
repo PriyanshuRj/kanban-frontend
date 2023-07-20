@@ -55,3 +55,16 @@ export async function updateTaskService(data, taskId){
         return [];
     }
 }
+export async function deleteTaskService(taskId){
+    try{
+
+        const res = await axios.delete(API_URL + `task?taskId=${taskId}` ,{
+            headers : headers
+        });
+        
+        return res;
+    }
+    catch(error){
+        return [];
+    }
+}

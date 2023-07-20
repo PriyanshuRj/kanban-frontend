@@ -2,6 +2,7 @@ import { Draggable } from 'react-beautiful-dnd'
 import React, {useState, useEffect} from 'react'
 import { Message, FolderMinus } from 'iconsax-react';
 import { ValidategetImages } from '../../validation/Images';
+import { ValidateDeleteTask } from '../../validation/Task';
 import { priorityColor } from '../../helpers/kanbarData'
 import ViewTask from '../Modals/Task';
 import Modal from 'react-modal';
@@ -9,7 +10,7 @@ import { styles } from '../../helpers/modalStyle';
 import ContextMenu from '../UI/ContextMenu';
 const loader = process.env.PUBLIC_URL + "/loading.svg";
 
-export default function TaskCard({ task, index, section, openEditTask }) {
+export default function TaskCard({ task, index, section, openEditTask, filterTasks }) {
 
     const [taskImages, setTaskImages] = useState(task.taskImages);
     const [taskViewModal, setTaskViewModal] = useState(false);
@@ -26,8 +27,10 @@ export default function TaskCard({ task, index, section, openEditTask }) {
     function closeTaskModal(){
         setTaskViewModal(false);
     }
-    function deleteTask(){
-
+    async function deleteTask(){
+        const res = await ValidateDeleteTask(task._id);
+        if(res)
+         filterTasks(task._id, section._id);
     }
     function updateTask(){
         openEditTask(task, section);
