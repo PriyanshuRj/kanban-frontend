@@ -9,7 +9,7 @@ import { styles } from '../../helpers/modalStyle';
 import ContextMenu from '../UI/ContextMenu';
 const loader = process.env.PUBLIC_URL + "/loading.svg";
 
-export default function TaskCard({ task, index, section }) {
+export default function TaskCard({ task, index, section, openEditTask }) {
 
     const [taskImages, setTaskImages] = useState(task.taskImages);
     const [taskViewModal, setTaskViewModal] = useState(false);
@@ -30,7 +30,8 @@ export default function TaskCard({ task, index, section }) {
 
     }
     function updateTask(){
-
+        console.log("called")
+        openEditTask(task, section);
     }
     const menuList =[
         {title:"View Task", function: openTaskView},

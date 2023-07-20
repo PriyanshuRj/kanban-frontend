@@ -13,9 +13,9 @@ export default function Kanban({boardId}) {
   const board = useSelector(state=>state.board.board);
   const [data, setData] = useState([]);
   const [sectionModalState, setSectionModalState] = useState(false);
-  const [taskModalState, setTasknModalState] = useState(false);
+  const [taskModalState, setTaskModalState] = useState(false);
   const [currentSection, setCurrentSection] = useState(data ? data: null);
-
+  const [currentTaskData, setCurrentTaskData] = useState(null);
   useEffect(()=>{
     if(board.sections && board.sections.length){
       setData(board.sections);
@@ -32,10 +32,10 @@ export default function Kanban({boardId}) {
     setSectionModalState(true);
   }
   function closeTaskModal(){
-    setTasknModalState(false);
+    setTaskModalState(false);
   }
   function openTaskModal(){
-    setTasknModalState(true);
+    setTaskModalState(true);
   }
   async function onDragEnd({ source, destination }) {
     if (!destination) return
@@ -66,8 +66,10 @@ export default function Kanban({boardId}) {
     ValidateupdatePositions(newTaskData[sourceColIndex].tasks,newTaskData[destinationColIndex].tasks, newTaskData[sourceColIndex]._id, newTaskData[destinationColIndex]._id);
   }
   function openAddTaskModal(section){
+    setCurrentTaskData(null);
+    setCurrentSection(section);
     openTaskModal();
-    setCurrentSection(section)
+
   }
   async function addTask(task) {
     try {
@@ -85,6 +87,12 @@ export default function Kanban({boardId}) {
   }
   function AddNewSection(section){
     setData([...data, section])
+  }
+
+  function openEditTask(task, section){
+    setCurrentSection(section);
+    setCurrentTaskData(task);
+    setTaskModalState(true);
   }
   return (
    
@@ -107,7 +115,7 @@ export default function Kanban({boardId}) {
       >
         <div className='relative'>
 
-        <AddTask modalState={taskModalState} sections={data} afterAddTask={addTask} currentSection={currentSection} closeTaskModal={closeTaskModal} />
+        <AddTask modalState={taskModalState} sections={data} afterAddTask={addTask} currentSection={currentSection} closeTaskModal={closeTaskModal} currentTaskData={currentTaskData}/>
        
         </div>
       </Modal>
@@ -117,7 +125,7 @@ export default function Kanban({boardId}) {
             data && data.map(section => 
               {
                 return <div key={section.id} className='w-full bg-[#F5F5F5] rounded-xl p-4 shadow-slate-300 shadow-md  h-min min-w-[24.2rem] '>
-                <Section section={section} openAddTaskModal={openAddTaskModal}/>
+                <Section section={section} openAddTaskModal={openAddTaskModal} openEditTask={openEditTask}/>
               </div>
               }
             )

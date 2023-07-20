@@ -16,6 +16,7 @@ export async function createTaskService(data, sectionId){
     }
 }
 
+
 export async function updatePositions(data){
     try{
         const res = await axios.put(API_URL + `task/updatePositions`, data ,{
@@ -31,6 +32,20 @@ export async function updatePositions(data){
 export async function asigneeTaskService(data, taskId){
     try{
         const res = await axios.post(API_URL + `task/asigne?taskId=${taskId}`, data ,{
+            headers : headers
+        });
+        
+        return res;
+    }
+    catch(error){
+        return [];
+    }
+}
+
+export async function updateTaskService(data, taskId){
+    try{
+        headers['Content-Type'] = 'multipart/form-data'
+        const res = await axios.put(API_URL + `task?taskId=${taskId}`, data ,{
             headers : headers
         });
         

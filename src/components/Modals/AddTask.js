@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react'
-import validateTask from '../../validation/Task';
+import React, { useState, useRef, useEffect } from 'react'
+import validateTask, {validateUpdateTask} from '../../validation/Task';
 import { useDispatch, useSelector } from 'react-redux';
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
@@ -13,7 +13,8 @@ const priorityList = [{ id: "Low", title: "Low" },
 { id: "Medium", title: "Medium" },
 { id: "High", title: "High" }
 ]
-export default function AddTask({ sections, modalState, closeTaskModal, currentSection, afterAddTask }) {
+export default function AddTask({ sections, modalState, closeTaskModal, currentSection, afterAddTask, currentTaskData }) {
+  
   const board = useSelector(state => state.board.board);
   const dispatch = useDispatch();
   const [title, setTitle] = useState('');
@@ -24,16 +25,26 @@ export default function AddTask({ sections, modalState, closeTaskModal, currentS
   const [selectedSection, setSelectedSection] = useState(currentSection);
   const [taskFiles, setTaskFiles] = useState(null);
 
+  useEffect(()=>{
+    if(currentTaskData){
+      setTitle(currentTaskData.title);
+      setContent(currentTaskData.content);
+      setDeadline(new Date(currentTaskData.deadline))
+      setPriority(priorityList.find((priority)=> priority.title == currentTaskData.priority))
+    }
+  },[currentTaskData])
   const editorWrapperRef = useRef();
   async function createTask() {
     try {
-      console.log(taskFiles)
+
       const position = selectedSection ? selectedSection.tasks.length : 0
-      const res = await validateTask(title, selectedSection._id, priority.id, deadline, content, taskFiles,position );
+      var res;
+      if(!currentTaskData) res = await validateTask(title, selectedSection._id, priority.id, deadline, content, taskFiles,position );
+      else res = await validateUpdateTask(title, selectedSection._id, priority.id, deadline, content, taskFiles,position, currentTaskData._id );
       console.log(res);
-      if(res.status===201){
+      if(res.status===201 || res.status==200){
         console.log(res.data.task);
-        afterAddTask(res.data.task)
+        // afterAddTask(res.data.task)
       }
     } catch (e) {
       console.warn("error ", e);

@@ -1,5 +1,5 @@
 import {  toast } from 'react-toastify';
-import { createTaskService, updatePositions, asigneeTaskService } from '../services/taskService';
+import { createTaskService, updatePositions, asigneeTaskService, updateTaskService } from '../services/taskService';
 import toastStyles from '../helpers/toastStyle';
 
 function isValidEmail(email) {
@@ -81,6 +81,53 @@ export async function ValidateAsigneTask(asignee, taskId){
     }
     else {
         toast.error('Asigning Task Failed', toastStyles);
+        return false;
+    }
+}
+
+export async function validateUpdateTask(title, sectionId, priority, deadline, content, taskImages,position,taskId){
+
+    if(title.length < 2){
+        toast.warn('Title should be of atlest 2 digits', toastStyles);
+        return false;
+    }
+
+    const id = toast.loading("Creating Task",toastStyles)
+
+    const formData = new FormData();
+    formData.append("title",title);
+    formData.append("priority",priority);
+    formData.append("content",content);
+    formData.append("destinationSectionId",sectionId);
+    formData.append("deadline",deadline);
+    formData.append("position",position);
+    if(taskImages) 
+        for (const image of taskImages) {
+            formData.append("files",image,image.name);
+        }
+    
+    for (const pair of formData.entries()) {
+        console.log(`${pair[0]}, ${pair[1]}`);
+      }
+    const res = await updateTaskService(formData, taskId);
+    console.log(res);
+    if(res.status === 200){
+        toast.update(id, { 
+            render: "Task Updated Successfully", 
+            type: "success",
+            isLoading: false,
+            ...toastStyles
+        });
+        return res;
+    }
+  
+    else {
+        toast.update(id, { 
+            render: "Error updating Task", 
+            type: "error",
+            isLoading: false,
+            ...toastStyles
+        });
         return false;
     }
 }

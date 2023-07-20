@@ -25,16 +25,16 @@ export default function UpdateProfile({ closeModal }) {
     async function updateUserProfile() {
         const prevState = userData;
         try {
-            
+
             dispatch(updateProfile({ email, mobileno, username, name }))
             closeModal();
             const res = await validateProfileUpdate(email, mobileno, username, name);
-            if (res && res.status==200) {
+            if (res && res.status == 200) {
 
             }
             else {
                 console.log("Here we are", prevState)
-                dispatch(updateProfile( prevState ))
+                dispatch(updateProfile(prevState))
 
             }
         } catch (e) {
