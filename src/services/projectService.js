@@ -14,7 +14,7 @@ export async function createProjectService(data){
         return [];
     }
 }
-export async function getSingleProject(projectId){
+export async function getSingleProjectService(projectId){
     try{
         const res = await axios.get(URL + `project/getProject?projectId=${projectId}` ,{
             headers : headers
@@ -27,9 +27,9 @@ export async function getSingleProject(projectId){
     }
 }
 
-export async function deleteProject(projectId){
+export async function deleteProjectService(projectId){
     try{
-        const res = await axios.get(URL + `project?projectId=${projectId}` ,{
+        const res = await axios.delete(URL + `project?projectId=${projectId}` ,{
             headers : headers
         });
         

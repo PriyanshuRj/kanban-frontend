@@ -1,5 +1,5 @@
 import {  toast } from 'react-toastify';
-import { createSectionService } from '../services/sectionService';
+import { createSectionService, deleteSectionService } from '../services/sectionService';
 import toastStyles from '../helpers/toastStyle';
 
 export default async function validateSection(title, color, projectId){
@@ -32,7 +32,32 @@ export default async function validateSection(title, color, projectId){
         });
         return false;
     }
+}
+
+export async function ValidateDeleteSection(sectionId){
+    if(!sectionId){
+        toast.warn('Please provide a correct Task ', toastStyles);
+        return false;
+    }
     
-    
-    
+    const id = toast.loading("Deleting Task",toastStyles)
+    const res = await deleteSectionService(sectionId);
+    if(res.status===200){
+        toast.update(id, { 
+            render: "Task Deleted Successfully", 
+            type: "success",
+            isLoading: false,
+            ...toastStyles
+        });
+        return res;
+    }
+    else {
+        toast.update(id, { 
+            render: "Task Deleted Failed", 
+            type: "error",
+            isLoading: false,
+            ...toastStyles
+        });
+        return false;
+    }
 }

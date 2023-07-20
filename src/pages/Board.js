@@ -1,15 +1,16 @@
-import React,{useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import Kanban from '../components/Kanban/Kanban'
 import Layout from '../layout/Layout'
-import { useNavigate, useParams} from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Modal from 'react-modal';
 import SendInvite from '../components/Modals/sendInvite'
 import { styles } from '../helpers/modalStyle'
 import { Link1, AddSquare, Filter, ArrowDown2, Calendar1, Profile2User, Pause, Menu } from 'iconsax-react';
-import { getSingleProject } from '../services/projectService'
+import { getSingleProjectService } from '../services/projectService'
 import { setBoards } from '../redux/features/boardSlice'
-
+import { Trash } from 'iconsax-react';
+import { ValidateProjectDelete } from '../validation/Project'
 const user1Pic = process.env.PUBLIC_URL + "/user1.png";
 const user2Pic = process.env.PUBLIC_URL + "/user2.png";
 const user3Pic = process.env.PUBLIC_URL + "/user3.png";
@@ -20,26 +21,31 @@ export default function Board() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { boardId } = useParams();
-  async function fetchAndSetProject(){
-    const res = await getSingleProject(boardId);
-    if(res.status == 200) dispatch(setBoards(res.data.project))
+  async function fetchAndSetProject() {
+    const res = await getSingleProjectService(boardId);
+    if (res.status == 200) dispatch(setBoards(res.data.project))
   }
-  useEffect(()=>{
+  useEffect(() => {
     fetchAndSetProject();
-  },[boardId])
-  const board = useSelector(state=>state.board.board);
-  const userData = useSelector((state)=> state.user.value);
+  }, [boardId])
+
+  async function deleteProject() {
+    await ValidateProjectDelete(boardId);
+    navigate('/dashboard');
+  }
+  const board = useSelector(state => state.board.board);
+  const userData = useSelector((state) => state.user.value);
   const [viewTyle, setViewType] = useState("list");
   const [inviteModalOpen, setInviteModalOpen] = useState(false);
-  function openInviteModal(){
+  function openInviteModal() {
     setInviteModalOpen(true)
   }
-  function closeInviteModal(){
+  function closeInviteModal() {
     setInviteModalOpen(false)
   }
   return (
     <Layout>
-        <Modal
+      <Modal
         isOpen={inviteModalOpen}
         ariaHideApp={false}
         onRequestClose={closeInviteModal}
@@ -110,7 +116,7 @@ export default function Board() {
                 />
                 <span className='hidden md:flex'>
 
-                Filter
+                  Filter
                 </span>
                 <ArrowDown2
                   size="16"
@@ -126,7 +132,7 @@ export default function Board() {
                 />
                 <span className='hidden md:flex'>
 
-                Today
+                  Today
                 </span>
                 <ArrowDown2
                   size="16"
@@ -143,34 +149,26 @@ export default function Board() {
                   className='drop-shadow-md sm:mr-2'
                 />
                 <span className='hidden sm:flex'>
-                Share
+                  Share
                 </span>
               </div>
               <div className='h-8 w-0 border mx-4'>
               </div>
-              <div className='flex flex-row items-center'>
-                <div onClick={()=>setViewType("list")} className={`h-8 w-8 ${viewTyle==="list" && "bg-[#5030E5]" }  rounded-md flex justify-center items-center cursor-pointer`}>
-                  <Pause
-                    size="16"
-                    color={`  ${viewTyle==="grid" ? "#787486" : 'white'} `}
-                    className=' rotate-90'
-                    variant="Bold"
-                  />
-                </div>
-                <div onClick={()=>setViewType("grid")} className={`h-8 w-8 ${viewTyle==="grid" && "bg-[#5030E5]" } ml-2 rounded-md flex justify-center items-center cursor-pointer`}>
-                  <Menu
-                    size="16"
-                    color={`  ${viewTyle==="grid" ? "white" : '#787486'} `}
-                    className=' rotate-90'
-                    variant="Bold"
-                  />
-                </div>
+              <div onClick={deleteProject} className=' border cursor-pointer rounded-md px-3 py-[0.45rem] text-red-500 border-red-500 border-2 text-medium flex flex-row items-center text-[0.8rem] hover:bg-red-500 hover:text-white'>
+                <Trash
+                  size="16"
+                  className='drop-shadow-md sm:mr-2'
+                />
+                <span className='hidden sm:flex'>
+                  Delete
+                </span>
               </div>
+
             </div>
           </div>
         </div>
         <div className=' overflow-x-scroll hide-scrollbar '>
-        <Kanban boardId={boardId} />
+          <Kanban boardId={boardId} />
         </div>
       </div>
     </Layout>

@@ -17,7 +17,7 @@ export async function createSectionService(data, projectId){
 
 export async function deleteSectionService(sectionId){
     try{
-        const res = await axios.post(URL + `section?sectionId=${sectionId}` ,{
+        const res = await axios.delete(URL + `section?sectionId=${sectionId}` ,{
             headers : headers
         });
         
