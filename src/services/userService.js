@@ -1,6 +1,6 @@
 import axios from 'axios';
 import URL from './URL';
-import headers from './axiosClient';
+import getHeader from './axiosClient';
 
 export async function signupService(data){
     try{
@@ -27,9 +27,9 @@ export async function loginService(data){
 
 export async function getProfileService(){
     try{
-        console.log(headers)
+        console.log(getHeader())
         const res = await axios.get(URL + "profile",{
-            headers : headers
+            headers : getHeader()
         });
         return res;
     }
@@ -41,7 +41,7 @@ export async function addProfilePictureService(data){
     try{
 
         const res = await axios.put(URL + "profile/profilepicture",data,{
-            headersheaders : {...headers, 'Content-Type':'multipart/form-data' }
+            headersheaders : {...getHeader(), 'Content-Type':'multipart/form-data' }
         });
         return res;
     }
@@ -52,7 +52,7 @@ export async function addProfilePictureService(data){
 export async function updateProfile(data){
     try{
         const res = await axios.put(URL + "profile",data,{
-            headers : headers
+            headers : getHeader()
         });
         return res;
     }

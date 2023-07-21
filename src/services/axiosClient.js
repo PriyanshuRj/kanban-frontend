@@ -1,9 +1,12 @@
-const getToken = () => localStorage.getItem('token')
+const getToken = () => {
+    return localStorage.getItem('token')
+}
 
+function getHeader(){
+    return {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${getToken()}`
+    }
+}
 
-const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${getToken()}`
-};
-
-export default headers;
+export default getHeader;

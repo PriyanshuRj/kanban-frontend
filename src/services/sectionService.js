@@ -1,11 +1,11 @@
 import axios from 'axios';
 import URL from './URL';
-import headers from './axiosClient';
+import getHeader from './axiosClient';
 
 export async function createSectionService(data, projectId){
     try{
         const res = await axios.post(URL + `section?projectId=${projectId}`, data ,{
-            headers : headers
+            headers : getHeader()
         });
         
         return res;
@@ -18,7 +18,7 @@ export async function createSectionService(data, projectId){
 export async function deleteSectionService(sectionId){
     try{
         const res = await axios.delete(URL + `section?sectionId=${sectionId}` ,{
-            headers : headers
+            headers : getHeader()
         });
         
         return res;

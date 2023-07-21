@@ -1,11 +1,11 @@
 import axios from 'axios';
 import URL from './URL';
-import headers from './axiosClient';
+import getHeader from './axiosClient';
 
 export async function createProjectService(data){
     try{
         const res = await axios.post(URL + "project", data ,{
-            headers : headers
+            headers : getHeader()
         });
         
         return res;
@@ -17,7 +17,7 @@ export async function createProjectService(data){
 export async function getSingleProjectService(projectId){
     try{
         const res = await axios.get(URL + `project/getProject?projectId=${projectId}` ,{
-            headers : headers
+            headers : getHeader()
         });
         
         return res;
@@ -30,7 +30,7 @@ export async function getSingleProjectService(projectId){
 export async function deleteProjectService(projectId){
     try{
         const res = await axios.delete(URL + `project?projectId=${projectId}` ,{
-            headers : headers
+            headers : getHeader()
         });
         
         return res;
