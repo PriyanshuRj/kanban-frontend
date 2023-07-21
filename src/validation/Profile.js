@@ -24,6 +24,7 @@ export default async function validatePIP(photo) {
         toast.update(id, {
             render: "Profile Picture Updated",
             type: "success",
+            isLoading: false,
             ...toastStyles,
         });
         return res;
@@ -58,7 +59,7 @@ export async function validateProfileUpdate(email, mobileno, username, name) {
         return false;
     }
 
-    const id = toast.loading("Signing in", toastStyles)
+    const id = toast.loading("Updating profile in", toastStyles)
     const res = await updateProfile({ email, name, username, mobileno });
     if (res.status === 200) {
         toast.update(id, {

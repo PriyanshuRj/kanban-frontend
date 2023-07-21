@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Layout from '../layout/Layout'
 import { useParams } from 'react-router';
 import { ValidateGetInvite, ValidateInvite } from '../validation/Invite';
-import { Rings } from 'react-loader-spinner';
+import Loader from '../components/UI/Loader';
 import { useNavigate } from 'react-router';
 export default function Invite() {
   const navigate = useNavigate();
@@ -18,10 +18,10 @@ export default function Invite() {
       setLoading(false);
     }
     async function acceptInvite(){
-      const res = await ValidateInvite(inviteId, true, navigate);
+      await ValidateInvite(inviteId, true, navigate);
     }
     async function rejectInvite(){
-      const res = await ValidateInvite(inviteId, false, navigate);
+      await ValidateInvite(inviteId, false, navigate);
     }
     useEffect(()=>{
       getInviteDetails()
@@ -29,15 +29,7 @@ export default function Invite() {
   return (
     <Layout>
         {loading ? (
-      <div className="flex items-center justify-center h-32">
-        <Rings
-          height="220"
-          width="220"
-          // radius="9"
-          color="rgb(30 64 175)"
-          ariaLabel="loading"
-          />{" "}
-      </div>
+   <Loader />
     ) : (
       <div className='flex w-full h-full justify-center items-center '>
 

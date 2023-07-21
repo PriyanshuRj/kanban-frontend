@@ -75,20 +75,19 @@ export default function Kanban({boardId}) {
     try {
  
       const newData = [...data]
-      if(previosSectionId == task.section){
+      if(previosSectionId === task.section){
         const index = newData.findIndex(e => e.id === task.section)
         const sourceTasks = [...newData[index].tasks].map((sectionTask)=>{
-          if(sectionTask._id == task._id) return task;
+          if(sectionTask._id === task._id) return task;
           else return sectionTask;
         });
         const sourceSection = {...newData[index], tasks:sourceTasks}
         newData[index] = sourceSection
-
       }
       else {
         if(previosSectionId){
           const removeIndex = newData.findIndex(e => e.id === previosSectionId);
-          const tasks = [...newData[removeIndex].tasks].filter((sectionTask)=> sectionTask._id != task._id);
+          const tasks = [...newData[removeIndex].tasks].filter((sectionTask)=> sectionTask._id !== task._id);
           const section = {...newData[removeIndex], tasks:tasks}
           newData[removeIndex] = section
         }
@@ -115,7 +114,7 @@ export default function Kanban({boardId}) {
   function filterTasks(taskId, sectionId){
     const newData = [...data];
     const removeIndex = newData.findIndex(e => e.id === sectionId);
-    const tasks = [...newData[removeIndex].tasks].filter((sectionTask)=> sectionTask._id != taskId);
+    const tasks = [...newData[removeIndex].tasks].filter((sectionTask)=> sectionTask._id !== taskId);
     const section = {...newData[removeIndex], tasks:tasks}
     newData[removeIndex] = section
     setData(newData)
@@ -130,7 +129,7 @@ export default function Kanban({boardId}) {
         style={styles}
         contentLabel="Add Project Modal"
       >
-        <AddSection  modalState={sectionModalState} boardId={boardId} AddNewSection={AddNewSection} />
+        <AddSection  modalState={sectionModalState} boardId={boardId} AddNewSection={AddNewSection} closeSectionModal={closeSectionModal}/>
       </Modal>
       <Modal
         isOpen={taskModalState}
@@ -146,11 +145,11 @@ export default function Kanban({boardId}) {
         </div>
       </Modal>
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className='flex flex-col sm:flex-row justify-between w-full gap-8 mr-8 min-h-[20rem]'>
+        <div className={`flex flex-col sm:flex-row ${data.length>=2 ? ' justify-between ': ' justify-start '}  w-full gap-8 mr-8 min-h-[20rem]`}>
           {
-            data && data.map(section => 
+            data && data.map((section, index) => 
               {
-                return <div key={section.id} className='w-full dark:bg-gray-600 bg-[#F5F5F5] rounded-xl p-4 shadow-slate-300 dark:shadow-slate-700 shadow-md  h-min min-w-[24.2rem] '>
+                return <div key={section._id? section._id : section} className='w-full dark:bg-gray-600 bg-[#F5F5F5] rounded-xl p-4 shadow-slate-300 dark:shadow-slate-700 shadow-md  h-min min-w-[24.2rem] max-w-[26rem] 2xl:max-w-[28rem]'>
                 <Section section={section} openAddTaskModal={openAddTaskModal} openEditTask={openEditTask} filterTasks={filterTasks}/>
               </div>
               }
@@ -158,7 +157,7 @@ export default function Kanban({boardId}) {
           }
           <div className='min-w-[26rem] flex'>
 
-            <div onClick={openSectionModal} className='cursor-pointer bg-[#5030E5] bg-opacity-25 rounded-xl p-4 shadow-slate-300 shadow-md  h-min min-w-[24.2rem] hover:shadow-2xl duration-100 ease-in-out'>
+            <div onClick={openSectionModal} className='cursor-pointer bg-[#5030E5] bg-opacity-25 rounded-xl p-4 shadow-slate-300 shadow-md  h-min min-w-[24.2rem]  hover:shadow-2xl duration-100 ease-in-out'>
 
               <div className='headerList' >
 

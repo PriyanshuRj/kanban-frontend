@@ -9,13 +9,14 @@ export  const styles = {
       zIndex: 20,
       display: 'flex',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
     },
     content: {
         top: '50%',
         left: '50%',
         right: 'auto',
         bottom: 'auto',
+    
         marginRight: '-50%',
         transform: 'translate(-50%, -50%)',
         padding : '0',
@@ -24,6 +25,7 @@ export  const styles = {
         backdropFilter: 'blur( 7px )',
         overflow: 'none',
         borderRadius: '10px',
-        border: '1px solid rgba( 255, 255, 255, 0.18 )'
+        border: '1px solid rgba( 255, 255, 255, 0.18 )',
+       marginBottom:'10rem'
       },
   }

@@ -43,7 +43,7 @@ export default function Projects() {
         {projectList.length ? 
         <div className='flex flex-row flex-wrap justify-between md:justify-start'>
         {projectList.map((card,index)=> {
-          return  <ProjectCard card={card}/>
+          return  <ProjectCard key={index} card={card}/>
          
         })}
         </div> : 

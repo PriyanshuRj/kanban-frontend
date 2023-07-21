@@ -41,7 +41,7 @@ export async function addProfilePictureService(data){
     try{
 
         const res = await axios.put(URL + "profile/profilepicture",data,{
-            headersheaders : {...getHeader(), 'Content-Type':'multipart/form-data' }
+            headers : {...getHeader(), 'Content-Type':'multipart/form-data' }
         });
         return res;
     }

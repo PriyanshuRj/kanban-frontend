@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Rings } from "react-loader-spinner";
 
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import validateSignup from "../validation/signup";
 export default function Signup() {
 
@@ -11,7 +9,6 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [mobileno, setMobileNo] = useState("");
   const [fullName, setFullName] = useState("");
-  const [loading, setLoading] = useState(false);
   const [otpState, setOTPState] = useState("email");
   let navigate = useNavigate();
 
@@ -30,17 +27,7 @@ export default function Signup() {
   };
   return (
     <>
-      {loading ? (
-        <div className="flex items-center justify-center w-screen h-screen">
-          <Rings
-            height="220"
-            width="220"
-            // radius="9"
-            color="rgb(30 64 175)"
-            ariaLabel="loading"
-          />{" "}
-        </div>
-      ) : (
+   
         <div className="bg-white">
           <div className="flex min-h-screen">
             <div className="flex flex-row w-full">
@@ -150,7 +137,7 @@ export default function Signup() {
             </div>
           </div>
         </div>
-      )}
+      
     </>
   );
 }

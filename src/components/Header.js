@@ -4,7 +4,6 @@ import ContextMenu from './UI/ContextMenu';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { setTheme } from '../redux/features/themeSlice';
-const profilePicture = process.env.PUBLIC_URL + "/user1.png";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -61,7 +60,13 @@ export default function Header() {
             </p>
           </div>
           <div className='flex flex-row items-center'>
-            <img src={userData.profilePicture ? userData.profilePicture : profilePicture} className='h-10 w-10 rounded-full object-cover' alt="profile"/>
+            {userData.profilePicture ?
+            <img src={ userData.profilePicture } className='h-10 w-10 rounded-full object-cover' alt="profile"/>
+            :
+            <div className='mr-2 h-10 w-10 rounded-full bg-blue-400 border border-2 border-blue-600 flex items-center justify-center'>
+                        {userData.name && userData.name.substring(0,1)}
+                        </div>
+            }
             <ArrowDown2 size="18" color="#292D32" className='ml-2' />
           </div>
         </div>

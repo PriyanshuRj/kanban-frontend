@@ -33,6 +33,7 @@ export default function TaskCard({ task, index, section, openEditTask, filterTas
          filterTasks(task._id, section._id);
     }
     function updateTask(){
+        closeTaskModal();
         openEditTask(task, section);
     }
     const menuList =[
@@ -53,7 +54,7 @@ export default function TaskCard({ task, index, section, openEditTask, filterTas
         style={styles}
         contentLabel="Add Project Modal"
       >
-        <ViewTask  closeTaskModal={closeTaskModal} task={task} section={section} taskImages={taskImages}/>
+        <ViewTask updateTask={updateTask}  closeTaskModal={closeTaskModal} task={task} section={section} taskImages={taskImages}/>
       </Modal>
         <Draggable key={task._id} draggableId={task.id} index={index}>
             {(provided, snapshot) => {
@@ -85,17 +86,20 @@ export default function TaskCard({ task, index, section, openEditTask, filterTas
                                 </ContextMenu>
                             </div>
                             <div className="headerCard"><h2 className='text-[1.1rem]  dark:text-white text-[#0D062D] font-semibold my-1'>{task.title === '' ? 'No Title' : task.title}</h2></div>
-                            {task.content && <p className="content text-[0.75rem] text-[#787486]  dark:text-gray-400" dangerouslySetInnerHTML={{ __html: task.content }} />}
+                            {task.content && <p className="content text-[0.75rem] text-[#787486]  dark:text-gray-400 mb-2" dangerouslySetInnerHTML={{ __html: task.content }} />}
                             <div className='flex flex-row justify-between gap-3'>
 
                                 {taskImages.map((pic, index) => {
-                                    return <img key={index} className={`w-full h-auto object-fill min-w-[4rem] ${!(pic.substring(0,4)==="data") && " h-[8rem]"}`} src={pic.substring(0,4)==="data" ? pic : loader} alt="task" />
+                                    return <img key={index} className={`w-full h-auto object-fill min-w-[4rem] rounded-2xl ${!(pic.substring(0,4)==="data") && " h-[8rem]"}`} src={pic.substring(0,4)==="data" ? pic : loader} alt="task" />
                                 })}
                             </div>
                             <div className='flex flex-row justify-between mt-5'>
                                 <div className='flex flex-row'>
                                     {task.assignies && task.assignies.map((assignie, index) => {
-                                        return <img className={`h-6 w-6 ${index && '-ml-2'} `} style={{ zIndex: task.assignies.length - index }} key={index.toString()} src={assignie} alt="assignie" />
+                                        return   <div className='mr-2 h-6 w-6 rounded-full bg-blue-400 border border-2 border-blue-600 flex items-center justify-center text-sm'>
+                        {assignie.name.substring(0,1)}
+                        {/* <img className={`h-6 w-6 ${index && '-ml-2'} `} style={{ zIndex: task.assignies.length - index }} key={index.toString()} src={assignie} alt="assignie" /> */}
+                        </div>
                                     })}
                                 </div>
                                 <div className='flex flex-row text-[0.75rem] items-center text-[#787486]'>

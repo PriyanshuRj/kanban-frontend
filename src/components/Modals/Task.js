@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { CloseCircle, Calendar1, DocumentUpload } from 'iconsax-react';
+import { CloseCircle, Calendar1 } from 'iconsax-react';
 import { useSelector } from 'react-redux';
 import { priorityColor } from '../../helpers/kanbarData';
 import { Edit, TickCircle } from 'iconsax-react';
@@ -7,9 +7,8 @@ import Dropdown from '../UI/DropDown';
 import { ValidateAsigneTask } from '../../validation/Task';
 
 const loader = process.env.PUBLIC_URL + "/loading.svg";
-const asignieProfilePicture = process.env.PUBLIC_URL + "/user1.png";
 
-export default function ViewTask({ task, section, closeTaskModal, taskImages }) {
+export default function ViewTask({ task, section, closeTaskModal, taskImages, updateTask }) {
     const [asignee, setAsignee] = useState(task.assignies.length ? {...task.assignies[0], title: task.assignies[0].name} : { title: 'No One Assigned' });
     const [selectAsignee, setSelectAsignee] = useState(false);
     const board = useSelector((state) => state.board.board)
@@ -24,7 +23,7 @@ export default function ViewTask({ task, section, closeTaskModal, taskImages }) 
         setSelectAsignee(true);
     }
     return (
-        <div className=" px-8 pt-6 pb-8 min-w-[32rem]">
+        <div className=" px-8 pt-6 pb-8 min-w-[32rem] max-w-[40rem] ">
             <div className='mb-4 font-semibold text-lg flex justify-between text-sm'>
                 <div>
                     <span className='text-gray-500'>
@@ -43,7 +42,7 @@ export default function ViewTask({ task, section, closeTaskModal, taskImages }) 
                     size="25"
                     color="#787486"
                     variant="Outline"
-
+                    onClick={updateTask}
                 />
             </div>
             <div className='mb-4 flex flex-row justify-between items-center'>
@@ -67,7 +66,12 @@ export default function ViewTask({ task, section, closeTaskModal, taskImages }) 
                 <div className=''>
 
                     {!selectAsignee ? <div className='flex flex-row items-center cursor-pointer' onDoubleClick={openSetectAsignee}>
-                    <img src={asignieProfilePicture} className='mr-2 h-8 w-8 rounded-full' alt="profile"/> {asignee.title} </div> :<div className=' flex pl-5 border-gray-300 p-2 rounded-md cursor-pointer justify-end' >
+                    {asignee.name &&  
+                    <div className='mr-2 h-8 w-8 rounded-full bg-blue-400 border border-2 border-blue-600 flex items-center justify-center'>
+                        {asignee.name.substring(0,1)}
+                        </div>
+                    }
+                     {asignee.title} </div> :<div className=' flex pl-5 border-gray-300 p-2 rounded-md cursor-pointer justify-end' >
                         <Dropdown selected={asignee} setSelected={setAsignee} inputList={membersList} DivWidth={"16rem"} />
                         <div className='bg-[#5030E5] p-2 rounded-xl flex justify-center items-center ml-2' onClick={asignTask} >
                             <TickCircle
@@ -102,7 +106,7 @@ export default function ViewTask({ task, section, closeTaskModal, taskImages }) 
                 <div className='flex flex-row justify-between gap-3'>
 
                     {taskImages.map((pic, index) => {
-                        return <img key={index} className={`w-full h-auto object-fill min-w-[4rem] ${!(pic.substring(0, 4) === "data") && " h-[8rem]"}`} src={pic.substring(0, 4) === "data" ? pic : loader} alt="task" />
+                        return <img key={index} className={`w-full h-auto object-fill min-w-[4rem] rounded-2xl ${!(pic.substring(0, 4) === "data") && " h-[8rem]"}`} src={pic.substring(0, 4) === "data" ? pic : loader} alt="task" />
                     })}
                 </div>
             </div>

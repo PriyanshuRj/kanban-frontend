@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Droppable } from 'react-beautiful-dnd'
 import TaskCard from '../Cards/TaskCard'
 import { AddSquare } from 'iconsax-react';
-import { Rings } from 'react-loader-spinner';
+
+import Loader from '../UI/Loader';
 export default function Section({ section, openAddTaskModal, openEditTask, filterTasks }) {
     const { tasks } = section;
     const [loading, setLoading] = useState(true);
@@ -11,25 +12,17 @@ export default function Section({ section, openAddTaskModal, openEditTask, filte
         if (section.tasks && section.tasks.length && section.tasks[0]._id) {
             setLoading(false);
         }
-        else if (section.tasks && section.tasks.length == 0) setLoading(false);
+        else if (section.tasks && section.tasks.length === 0) setLoading(false);
     }, [section])
 
     return (
         <>
             {loading ? (
-                <div className="flex items-center justify-center h-32">
-                    <Rings
-                        height="220"
-                        width="220"
-                        // radius="9"
-                        color="rgb(30 64 175)"
-                        ariaLabel="loading"
-                    />{" "}
-                </div>
+               <Loader loaderHeight="h-32" />
             ) : (
-                <Droppable key={section.id} droppableId={section.id}>
+                <Droppable key={section.id} droppableId={section.id} >
                     {(provided) => (
-                        <div className='headerList'
+                        <div className='headerList  '
                             ref={provided.innerRef}
                             {...provided.droppableProps}
                         >
@@ -47,7 +40,7 @@ export default function Section({ section, openAddTaskModal, openEditTask, filte
                                 </section>
                             </span>
                             <div>
-                                {
+                                {tasks && 
                                     tasks.map((task, index) => (
                                         <div key={task._id}>
 

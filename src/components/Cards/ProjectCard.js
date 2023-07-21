@@ -14,7 +14,7 @@ export default function ProjectCard({ card }) {
 
     return (
 
-        <div onClick={navigateToProject} className='shadow-lg dark:shadow-gray-600 backdrop-blur bg-opacity-50 p-4 rounded-lg border  dark:border-gray-600 w-full my-5 md:m-4 sm:w-[45%] lg:w-[30%] cursor-pointer hover:shadow-2xl duration-100 ease-in-out'>
+        <div key={card._id} onClick={navigateToProject} className='shadow-lg dark:shadow-gray-600 backdrop-blur bg-opacity-50 p-4 rounded-lg border  dark:border-gray-600 w-full my-5 md:m-4 sm:w-[45%] lg:w-[30%] cursor-pointer hover:shadow-2xl duration-100 ease-in-out'>
             <div className='flex flex-row items-center justify-between mb-4'>
                 <span className='p-2 bg-[#5030E5] rounded-md bg-opacity-25'>
                     <Folder2

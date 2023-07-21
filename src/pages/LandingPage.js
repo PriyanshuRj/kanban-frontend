@@ -6,6 +6,7 @@ import Header from '../components/LandingPage/Header';
 import FAQ from '../components/LandingPage/FAQ';
 import Features from '../components/LandingPage/Features';
 import Pricing from '../components/LandingPage/Pricing';
+import Testimonial from '../components/LandingPage/Testimonial';
 const logo = process.env.PUBLIC_URL + "/logo.png"
 
 export default function LandingPage() {
@@ -15,6 +16,7 @@ export default function LandingPage() {
             < Header />
             <Hero />
             <Features />
+            <Testimonial />
             <Pricing />
             <FAQ />
             <Footer />
