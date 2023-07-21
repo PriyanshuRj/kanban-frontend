@@ -4,7 +4,7 @@ import toastStyles from '../helpers/toastStyle';
 
 export async function ValidategetImages(images){
 
-    if (!images || images.length==0) return false;
+    if (!images || images.length===0) return false;
     const res = await getImagesService({images});
     if(res.status === 200){
         return res;

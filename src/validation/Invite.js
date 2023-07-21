@@ -57,7 +57,7 @@ export async function ValidateInvite(inviteId, acepted, navigate){
 
 export async function ValidateSendInvite(email, projectId, username){
 
-    if(projectId.length == 0){
+    if(projectId.length === 0){
         toast.warn('Project Not fonud ', toastStyles);
         return false;
     }

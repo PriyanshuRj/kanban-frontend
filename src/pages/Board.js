@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Modal from 'react-modal';
 import SendInvite from '../components/Modals/sendInvite'
 import { styles } from '../helpers/modalStyle'
-import { Link1, AddSquare, Filter, ArrowDown2, Calendar1, Profile2User, Pause, Menu } from 'iconsax-react';
+import { Link1, AddSquare, Filter, ArrowDown2, Calendar1, Profile2User } from 'iconsax-react';
 import { getSingleProjectService } from '../services/projectService'
 import { setBoards } from '../redux/features/boardSlice'
 import { Trash } from 'iconsax-react';
@@ -23,7 +23,7 @@ export default function Board() {
   const { boardId } = useParams();
   async function fetchAndSetProject() {
     const res = await getSingleProjectService(boardId);
-    if (res.status == 200) dispatch(setBoards(res.data.project))
+    if (res.status === 200) dispatch(setBoards(res.data.project))
   }
   useEffect(() => {
     fetchAndSetProject();
@@ -35,7 +35,6 @@ export default function Board() {
   }
   const board = useSelector(state => state.board.board);
   const userData = useSelector((state) => state.user.value);
-  const [viewTyle, setViewType] = useState("list");
   const [inviteModalOpen, setInviteModalOpen] = useState(false);
   function openInviteModal() {
     setInviteModalOpen(true)

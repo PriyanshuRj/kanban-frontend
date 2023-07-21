@@ -25,7 +25,7 @@ export default async function validateLogin(nameCred,  password){
     const id = toast.loading("Logining in", toastStyles)
 
     const res = await loginService({email,  password, mobileNo});
-
+    console.log({res})
     if(res.status === 200){
         toast.update(id, { 
             render: "Login Successful", 
@@ -35,7 +35,7 @@ export default async function validateLogin(nameCred,  password){
         });
         return res;
     }
-    else if(res.status === 300){
+    else if(res.status === 205){
         
         toast.update(id, { 
             render: "User not verified", 

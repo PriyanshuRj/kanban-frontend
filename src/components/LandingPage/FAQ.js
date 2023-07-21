@@ -18,7 +18,7 @@ export default function FAQ() {
                             <div id="accordion-flush-body-1" className="" aria-labelledby="accordion-flush-heading-1">
                                 <div className="py-5 border-b border-gray-200 dark:border-gray-700">
                                     <p className="mb-2 text-gray-500 dark:text-gray-400">Landwind is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.</p>
-                                    <p className="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a href="#" className="text-purple-600 dark:text-purple-500 hover:underline">get started</a> and start developing websites even faster with components on top of Tailwind CSS.</p>
+                                    <p className="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a href="/" className="text-purple-600 dark:text-purple-500 hover:underline">get started</a> and start developing websites even faster with components on top of Tailwind CSS.</p>
                                 </div>
                             </div>
                             <h3 id="accordion-flush-heading-2">
@@ -30,7 +30,7 @@ export default function FAQ() {
                             <div id="accordion-flush-body-2" className="hidden" aria-labelledby="accordion-flush-heading-2">
                                 <div className="py-5 border-b border-gray-200 dark:border-gray-700">
                                     <p className="mb-2 text-gray-500 dark:text-gray-400">Landwind is first conceptualized and designed using the Figma software so everything you see in the library has a design equivalent in our Figma file.</p>
-                                    <p className="text-gray-500 dark:text-gray-400">Check out the <a href="#" className="text-purple-600 dark:text-purple-500 hover:underline">Figma design system</a> based on the utility classes from Tailwind CSS and components from Landwind.</p>
+                                    <p className="text-gray-500 dark:text-gray-400">Check out the <a href="/" className="text-purple-600 dark:text-purple-500 hover:underline">Figma design system</a> based on the utility classes from Tailwind CSS and components from Landwind.</p>
                                 </div>
                             </div>
                             <h3 id="accordion-flush-heading-3">
@@ -45,8 +45,8 @@ export default function FAQ() {
                                     <p className="mb-2 text-gray-500 dark:text-gray-400">However, we actually recommend using both Landwind, Landwind Pro, and even Tailwind UI as there is no technical reason stopping you from using the best of two worlds.</p>
                                     <p className="mb-2 text-gray-500 dark:text-gray-400">Learn more about these technologies:</p>
                                     <ul className="pl-5 text-gray-500 list-disc dark:text-gray-400">
-                                        <li><a href="#" className="text-purple-600 dark:text-purple-500 hover:underline">Landwind Pro</a></li>
-                                        <li><a href="#" className="text-purple-600 dark:text-purple-500 hover:underline">Tailwind UI</a></li>
+                                        <li><a href="/" className="text-purple-600 dark:text-purple-500 hover:underline">Landwind Pro</a></li>
+                                        <li><a href="/" className="text-purple-600 dark:text-purple-500 hover:underline">Tailwind UI</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -62,8 +62,8 @@ export default function FAQ() {
                                     <p className="mb-2 text-gray-500 dark:text-gray-400">However, we actually recommend using both Landwind, Landwind Pro, and even Tailwind UI as there is no technical reason stopping you from using the best of two worlds.</p>
                                     <p className="mb-2 text-gray-500 dark:text-gray-400">Learn more about these technologies:</p>
                                     <ul className="pl-5 text-gray-500 list-disc dark:text-gray-400">
-                                        <li><a href="#" className="text-purple-600 dark:text-purple-500 hover:underline">Landwind Pro</a></li>
-                                        <li><a href="#" className="text-purple-600 dark:text-purple-500 hover:underline">Tailwind UI</a></li>
+                                        <li><a href="/" className="text-purple-600 dark:text-purple-500 hover:underline">Landwind Pro</a></li>
+                                        <li><a href="/" className="text-purple-600 dark:text-purple-500 hover:underline">Tailwind UI</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@ export default function FAQ() {
                     <div className="max-w-screen-sm mx-auto text-center">
                         <h2 className="mb-4 text-3xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white">Start your free trial today</h2>
                         <p className="mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg">Try Landwind Platform for 30 days. No credit card required.</p>
-                        <a href="#" className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800">Free trial for 30 days</a>
+                        <a href="/" className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800">Free trial for 30 days</a>
                     </div>
                 </div>
             </section>

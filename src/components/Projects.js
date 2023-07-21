@@ -1,5 +1,4 @@
-import React, {useState} from 'react'
-import { Edit, TickCircle } from 'iconsax-react';
+import React from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
 import {  AddSquare } from 'iconsax-react';
@@ -7,7 +6,6 @@ import { setModalState } from '../redux/features/projectSlice';
 import ProjectCard from './Cards/ProjectCard';
 export default function Projects() {
     const dispatch = useDispatch()
-    const userData = useSelector((state)=> state.user.value);
     const projectList = useSelector((state)=>state.projects.list);
     function openModal() {
       dispatch(setModalState(true));

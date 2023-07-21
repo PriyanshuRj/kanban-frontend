@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { CloseCircle, DocumentUpload } from 'iconsax-react';
 import { updateProfilePicture } from "../../redux/features/userSlice";
 import { toast } from 'react-toastify';
@@ -8,7 +8,6 @@ export default function UpdateProfilePicture({ closeProfileModal }) {
   const dispatch = useDispatch();
   const [image, setImage] = useState(null);
   const [profilePictue, setProfilePictue] = useState(null);
-  const userData = useSelector((state) => state.user.value);
 
   const handleImageChange = (event) => {
     setProfilePictue(null);

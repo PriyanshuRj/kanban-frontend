@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { AddSquare } from 'iconsax-react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setModalState } from '../../redux/features/projectSlice';
 import sidebarColor from '../../utils/sidebarColor';
 import {  useParams,useNavigate } from 'react-router-dom'
 import { setBoards } from '../../redux/features/boardSlice';
-import { Link } from 'react-router-dom';
+
 export default function ProjectList() {
     const navigate = useNavigate();
     const projectList = useSelector((state)=>state.projects.list);

@@ -19,7 +19,7 @@ export default function Hero() {
             </div>
         </div>
         <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-            <img src={heroImg} alt="hero image" />
+            <img src={heroImg} alt="hero" />
         </div>                
     </div>
 </section>

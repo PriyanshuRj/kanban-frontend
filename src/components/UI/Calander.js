@@ -36,7 +36,7 @@ const Calendar = ({seletctedDate, selectDate}) => {
   function compareDates(thisDay){
     const deadline = seletctedDate.getDate() + " - " + (seletctedDate.getMonth() + 1) + " - " + seletctedDate.getFullYear();
     const today = thisDay.getDate() + " - " + (thisDay.getMonth() + 1) + " - " + thisDay.getFullYear();
-    return today == deadline;
+    return today === deadline;
   }
   return (
     <div className=" mx-auto w-auto">

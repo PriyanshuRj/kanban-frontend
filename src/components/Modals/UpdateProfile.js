@@ -29,13 +29,11 @@ export default function UpdateProfile({ closeModal }) {
             dispatch(updateProfile({ email, mobileno, username, name }))
             closeModal();
             const res = await validateProfileUpdate(email, mobileno, username, name);
-            if (res && res.status == 200) {
+            if (!res || res.status !== 200) {
 
-            }
-            else {
                 dispatch(updateProfile(prevState))
-
             }
+            
         } catch (e) {
             dispatch(updateProfile({ prevState }))
             console.warn("error ", e);

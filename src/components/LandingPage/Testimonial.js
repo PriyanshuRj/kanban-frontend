@@ -12,7 +12,7 @@ export default function Testimonial() {
                 <p className="text-xl font-medium text-gray-900 md:text-2xl dark:text-white">"Using the Kanban Project Management Tool has been a game-changer for our team! Its intuitive Kanban board layout and real-time messaging system have transformed the way we collaborate and manage tasks. Assigning tasks, tracking progress, and staying organized has never been easier. We're more productive, efficient, and connected than ever before. Highly recommended!"</p>
             </blockquote>
             <figcaption className="flex items-center justify-center mt-6 space-x-3">
-                <img className="w-6 h-6 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png" alt="profile picture" />
+                <img className="w-6 h-6 rounded-full" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png" alt="profile" />
                 <div className="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700">
                     <div className="pr-3 font-medium text-gray-900 dark:text-white">Agrim Kondal</div>
                     <div className="pl-3 text-sm font-light text-gray-500 dark:text-gray-400">Ex CC Vibhav</div>

@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Colorfilter, ArrowLeft2, Category, Message, TaskSquare, Profile2User, Setting2,SearchNormal1 } from 'iconsax-react';
-import { sideNav } from '../../helpers/sidebar';
 import ProjectList from './ProjectList';
 import ThoughtTime from '../UI/ThoughtTime';
 import { Link } from 'react-router-dom';

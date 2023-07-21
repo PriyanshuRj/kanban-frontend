@@ -131,6 +131,9 @@ export default function Signup() {
                     >
                       Sign up
                     </button>
+                    <p>
+                      Verify your account <Link to="/otp" className="underline font-medium text-[#070eff]"> Verify OTP </Link>
+                    </p>
                   </div>
                 </div>
               </div>

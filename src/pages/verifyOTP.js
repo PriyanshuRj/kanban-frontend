@@ -5,7 +5,8 @@ import {  useLocation } from "react-router-dom";
 
 export default function VerifyOTP() {
   const location = useLocation();
-  const email = location.state.email;
+  const [email, setEmail] = useState(location.state ? location.state.emai : '');
+  // const email = location.state.email;
   const [otp, setOTP] = useState("");
 
 
@@ -59,7 +60,9 @@ export default function VerifyOTP() {
                     type="text"
                     placeholder="Email"
                     value={email}
-                    disabled
+                    disabled={location.state}
+                    onChange={(e) => setEmail(e.target.value)}
+
                     className="flex px-3 py-2 text-gray-500 font-medium border-2 border-gray-500 rounded-lg md:px-4 md:py-3 placeholder:font-normal"
                   />
                   <input

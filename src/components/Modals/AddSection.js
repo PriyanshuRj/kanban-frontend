@@ -1,13 +1,9 @@
 import React, { useState } from 'react'
-import { addProject } from '../../redux/features/projectSlice'
 import validateSection from '../../validation/section';
-import { useDispatch } from 'react-redux';
 import { BlockPicker } from 'react-color';
-import reactCSS from 'reactcss'
 const defaultColors = ['#8BC48A', '#76A5EA', '#FFA500',  '#5030E5', '#D9E3F0', '#F47373', '#697689', '#37D67A', '#2CCCE4', '#555555', '#dce775', '#ff8a65', '#ba68c8']
-export default function AddSection({boardId, modalState, AddNewSection, closeSectionModal}) {
+export default function AddSection({boardId, AddNewSection, closeSectionModal}) {
 
-  const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [color, setColor] = useState('#f47373');
   const [selectColor, setSelectColor] = useState(false)
@@ -18,7 +14,6 @@ export default function AddSection({boardId, modalState, AddNewSection, closeSec
       const res = await validateSection(title,color,  boardId);
       if(res && res.data){
         AddNewSection(res.data.section)
-        // dispatch(addProject(res.data.project))
       }
     } catch (e) {
       console.warn("error ", e);

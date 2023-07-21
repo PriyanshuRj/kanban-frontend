@@ -1,6 +1,5 @@
 import React, {Fragment} from 'react'
 import { Menu, Transition } from "@headlessui/react";
-import { User } from 'iconsax-react';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");

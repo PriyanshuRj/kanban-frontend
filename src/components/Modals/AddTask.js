@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import validateTask, {validateUpdateTask} from '../../validation/Task';
-import { useDispatch, useSelector } from 'react-redux';
+import {  useSelector } from 'react-redux';
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { CloseCircle, Calendar1, DocumentUpload } from 'iconsax-react';
@@ -16,7 +16,6 @@ const priorityList = [{ id: "Low", title: "Low" },
 export default function AddTask({ sections, modalState, closeTaskModal, currentSection, afterAddTask, currentTaskData }) {
   
   const board = useSelector(state => state.board.board);
-  const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [priority, setPriority] = useState(priorityList[0])
   const [content, setContent] = useState('')
@@ -30,7 +29,7 @@ export default function AddTask({ sections, modalState, closeTaskModal, currentS
       setTitle(currentTaskData.title);
       setContent(currentTaskData.content);
       setDeadline(new Date(currentTaskData.deadline))
-      setPriority(priorityList.find((priority)=> priority.title == currentTaskData.priority))
+      setPriority(priorityList.find((priority)=> priority.title === currentTaskData.priority))
     }
   },[currentTaskData])
   const editorWrapperRef = useRef();
@@ -41,7 +40,7 @@ export default function AddTask({ sections, modalState, closeTaskModal, currentS
       var res;
       if(!currentTaskData) res = await validateTask(title, selectedSection._id, priority.id, deadline, content, taskFiles,position );
       else res = await validateUpdateTask(title, selectedSection._id, priority.id, deadline, content, taskFiles,position, currentTaskData._id );
-      if(res.status===201 || res.status==200){
+      if(res.status===201 || res.status===200){
         afterAddTask(res.data.task, currentTaskData ? currentTaskData.section: null)
       }
     } catch (e) {
@@ -133,7 +132,7 @@ export default function AddTask({ sections, modalState, closeTaskModal, currentS
                   variant="Bulk"
                 />
               </div>
-              <p className="pointer-none text-gray-500 "><span className="text-sm">Drag and drop</span> files here <br /> or <a href="" id="" className="text-blue-600 hover:underline">select a file</a> from your computer</p>
+              <p className="pointer-none text-gray-500 "><span className="text-sm">Drag and drop</span> files here <br /> or select a file from your computer</p>
             </div>
             <input type="file" className="hidden"
             onChange={(e) => {

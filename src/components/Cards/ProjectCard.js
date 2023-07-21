@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link21, Folder2 } from 'iconsax-react'
-import { Link, useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 
 import { useDispatch } from 'react-redux'
 import { setBoards } from '../../redux/features/boardSlice'

@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { lists } from '../../helpers/kanbarData'
 const initialState = { board : {}
 }
 

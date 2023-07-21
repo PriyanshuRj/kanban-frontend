@@ -9,7 +9,7 @@ export default function SendInvite() {
   const userData = useSelector((state)=> state.user.value);
   async function send() {
     try {
-      const res = await ValidateSendInvite(email, board._id, userData.name);
+      await ValidateSendInvite(email, board._id, userData.name);
     } catch (e) {
       console.warn("error ", e);
     } 
