@@ -3,18 +3,21 @@ import { CloseCircle, Calendar1 } from 'iconsax-react';
 import { useSelector } from 'react-redux';
 import { priorityColor } from '../../helpers/kanbarData';
 import { Edit, TickCircle } from 'iconsax-react';
+
 import Dropdown from '../UI/DropDown';
 import { ValidateAsigneTask } from '../../validation/Task';
+import Comments from '../Comments';
 
 const loader = process.env.PUBLIC_URL + "/loading.svg";
+export default function ViewTask({ task, section, closeTaskModal, taskImages, updateTask,modalState }) {
 
-export default function ViewTask({ task, section, closeTaskModal, taskImages, updateTask }) {
     const [asignee, setAsignee] = useState(task.assignies.length ? {...task.assignies[0], title: task.assignies[0].name} : { title: 'No One Assigned' });
     const [selectAsignee, setSelectAsignee] = useState(false);
     const board = useSelector((state) => state.board.board)
     const membersList = board.members.map((member) => { return { ...member, title: member.name } })
     const { title, content, priority } = task;
     const deadline = new Date(task.deadline);
+
     function asignTask(){
         ValidateAsigneTask(asignee.email, task._id);
         setSelectAsignee(false);
@@ -33,7 +36,7 @@ export default function ViewTask({ task, section, closeTaskModal, taskImages, up
                         {section.title}
                     </span>
                 </div>
-                <CloseCircle size="25" color="#36454F" variant="Bulk" onClick={closeTaskModal} />
+                <CloseCircle size="25" color="#36454F" variant="Bulk" className='cursor-pointer' onClick={closeTaskModal} />
             </div>
             <div className="mb-4 flex justify-between items-center">
 
@@ -42,6 +45,7 @@ export default function ViewTask({ task, section, closeTaskModal, taskImages, up
                     size="25"
                     color="#787486"
                     variant="Outline"
+                    className='cursor-pointer'
                     onClick={updateTask}
                 />
             </div>
@@ -116,6 +120,7 @@ export default function ViewTask({ task, section, closeTaskModal, taskImages, up
             <div className="flex mb-8">
                 {content && <p className="content text-[0.75rem] text-[#787486]" dangerouslySetInnerHTML={{ __html: content }} />}
             </div>
+          <Comments task={task} modalState={modalState}/>
 
         </div>
     )

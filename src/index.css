@@ -55,3 +55,10 @@ code {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+.task-add-content .ck-editor{
+  max-width: 34rem;
+}
+.task-comment-class .ck-editor{
+  max-width: 40rem;
+  min-width: 36rem;
+}

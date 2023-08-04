@@ -65,7 +65,7 @@ export default function AddTask({ sections, modalState, closeTaskModal, currentS
     }
   }
   return (
-    <div className=" px-8 pt-6 pb-8">
+    <div className=" px-8 pt-6 pb-8 max-w-[40rem]">
       <div className='mb-4 font-semibold text-lg flex justify-between'>
         <div>
           <span className='text-gray-500'>
@@ -150,17 +150,20 @@ export default function AddTask({ sections, modalState, closeTaskModal, currentS
         <label className={`block text-gray-700 text-sm font-bold mb-2`} >
           To Do
         </label>
-        <div className="flex mb-8">
+        <div className="flex mb-8 task-add-content">
           <CKEditor
             editor={ClassicEditor}
             config={{
-              toolbar: ['heading', '|', 'bold', 'italic', 'underline', '|', 'undo', 'redo', '|', 'numberedList', 'link', 'insertTable', 'blockQuote']
+              toolbar: ['heading', '|', 'bold', 'italic', 'underline', '|', 'undo', 'redo', '|', 'numberedList', 'link', 'insertTable', 'blockQuote'],
+              width: 200
+              
             }}
             data={content}
             onChange={updateContent}
             onFocus={updateEditorHeight}
             onBlur={updateEditorHeight}
-            className="h-40"
+            className="h-40 max-w-[36rem]"
+            style={{width: "34rem"}}
           />
         </div>
         <div className="flex items-center justify-between">

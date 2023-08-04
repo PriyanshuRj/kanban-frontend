@@ -24,6 +24,7 @@ export default function Board() {
   async function fetchAndSetProject() {
     const res = await getSingleProjectService(boardId);
     if (res.status === 200) dispatch(setBoards(res.data.project))
+    console.log(res.data.project)
   }
   useEffect(() => {
     fetchAndSetProject();
