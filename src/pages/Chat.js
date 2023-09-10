@@ -42,7 +42,7 @@ export default function Chat() {
     
   }, [chatId])
   function connectToWs(){
-    const ws = new WebSocket(`ws://localhost:8000?tkn=${localStorage.getItem('token')}`, localStorage.getItem('token'))
+    const ws = new WebSocket(`${process.env.REACT_APP_SOCKET_URL}?tkn=${localStorage.getItem('token')}`, localStorage.getItem('token'))
     setWs(ws);
     ws.addEventListener('message', handleNewMessage);
     ws.addEventListener('close', ()=> {
