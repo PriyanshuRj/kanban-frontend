@@ -30,7 +30,7 @@ export default function Layout({ children }) {
       }
     }
     checkAuth()
-  }, [dispatch, navigate])
+  }, [dispatch])
   function closeModal(){
     dispatch(setModalState(false));
   }

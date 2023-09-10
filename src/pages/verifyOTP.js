@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import validateOTP from "../validation/OTP";
 import {  useLocation } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 export default function VerifyOTP() {
   const location = useLocation();
-  const [email, setEmail] = useState(location.state ? location.state.emai : '');
+  const navigate = useNavigate()
+  console.log()
+  const [email, setEmail] = useState(location.state ? location.state.email : '');
   // const email = location.state.email;
   const [otp, setOTP] = useState("");
 
 
   const submitOTP = async () => {
     try {
-      validateOTP(email, otp);
-
+      const res = await validateOTP(email, otp);
+      if(res.status === 201){
+        navigate('/login')
+      }
 
     } catch (e) {
       console.warn("error ", e);

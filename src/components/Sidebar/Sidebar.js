@@ -40,7 +40,7 @@ export default function Sidebar({sidebarState, setSidebarOpen}) {
           />
           <span >Home</span>
         </div>
-        <div className='flex flex-row items-center my-1 px-2 py-2 text-[#787486] hover:bg-[#5030E5] hover:bg-opacity-[0.08] rounded-lg cursor-pointer font-medium'>
+        <Link to="/chat" className='flex flex-row items-center my-1 px-2 py-2 text-[#787486] hover:bg-[#5030E5] hover:bg-opacity-[0.08] rounded-lg cursor-pointer font-medium'>
           <Message
             size="24"
             color="#787486"
@@ -48,7 +48,7 @@ export default function Sidebar({sidebarState, setSidebarOpen}) {
             className='mr-3'
           />
           <span>Message</span>
-        </div>
+        </Link>
         <div className='flex flex-row items-center my-1 px-2 py-2 text-[#787486] hover:bg-[#5030E5] hover:bg-opacity-[0.08] rounded-lg cursor-pointer font-medium'>
           <TaskSquare
             size="24"
